@@ -73,6 +73,5 @@ drawBars(array);
 // event to step through the array
 let stepButton = document.querySelector('#step');
 stepButton.addEventListener('click', _ => {
-  let array = generator.next().value;
-  drawBars(array);
+  drawBars(generator.next().value);
 });
