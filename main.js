@@ -40,10 +40,10 @@ const drawBars = array => {
   });
 };
 
-function bubbleSort(array) {
+function* bubbleSort(array) {
   // outer loop from end to start
   for (let i = array.length; i >= 0; i -= 1) {
-    // a flag to track whether we've swapped
+    // a flag to track whether we've swapped on this loop
     let swap = false;
 
     // inner loop that does the comparison
@@ -55,16 +55,21 @@ function bubbleSort(array) {
       }
     }
 
-    // quit if we didn't do any swaps
+    // quit outer loop if we didn't do any swaps
     if (!swap) {
       break;
     }
-  }
 
-  return array;
+    yield array;
+  }
 }
 
 let array = sortedArrayFactory(100);
 array = shuffleArray(array);
-array = bubbleSort(array);
-drawBars(array);
+let generator = bubbleSort(array);
+
+let stepButton = document.querySelector('#step');
+stepButton.addEventListener('click', _ => {
+  let array = generator.next().value;
+  drawBars(array);
+});
