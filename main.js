@@ -16,19 +16,6 @@ const shuffleArray = array => {
   return array;
 };
 
-// nearly sorted shuffler
-// fisher-yates bounded by array length / 10
-const barelyShuffleArray = array => {
-  for (let i = array.length - 1; i > 0; i -= 1) {
-    let randomness = Math.floor(array.length / 10);
-    let min = i - randomness;
-    let delta = i + 1 - min;
-    let j = Math.floor(Math.random() * delta) + min;
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
-
 // render the bars
 const drawBars = (array, LENGTH) => {
   // grab and clear the container
@@ -37,10 +24,24 @@ const drawBars = (array, LENGTH) => {
 
   // render each bar and add it
   array.forEach(arrayElement => {
+    // create the element
     let sortBarElement = document.createElement('div');
     sortBarElement.classList.add('sort_bar');
+
+    // add height
     let height = 300 * (arrayElement.value / LENGTH);
     sortBarElement.style.height = `${height}px`;
+
+    // add color
+    let colors = {
+      unsorted: 'black',
+      comparing: 'darkred',
+      swapping: 'red',
+      sorted: 'green'
+    };
+    sortBarElement.style.backgroundColor = colors[arrayElement.state];
+
+    // append
     sortContainer.appendChild(sortBarElement);
   });
 };
@@ -53,22 +54,46 @@ function* bubbleSort(array) {
 
     // inner loop that does the comparison
     for (let j = 0; j < i; j += 1) {
-      // check if we need to swap and do it
+      // mark elements as comparing
+      array[j].state = 'comparing';
+      array[j + 1].state = 'comparing';
 
+      // check if we need to swap and do it
       if (array[j].value > array[j + 1].value) {
+        // set swap to true
         swap = true;
+
+        // mark elements as swapping
+        array[j].state = 'swapping';
+        array[j + 1].state = 'swapping';
+
+        // do the swap
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
       }
+
+      // yield the array for drawing & pause
+      yield array;
+
+      // clear the element state
+      array[j].state = 'unsorted';
+      array[j + 1].state = 'unsorted';
     }
+
+    // set the top element as sorted
+    array[i].state = 'sorted';
 
     // quit outer loop if we didn't do any swaps
     if (!swap) {
+      // mark all states as sorted
+      for (let x = 0; x < array.length; x += 1) {
+        array[i].state = 'sorted';
+      }
+
+      // quit
       break;
     }
-
-    // return the array
-    yield array;
   }
+  yield array;
 }
 
 // initialize an unsorted array
