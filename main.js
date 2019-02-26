@@ -25,7 +25,7 @@ const barelyShuffleArray = array => {
 };
 
 // render the bars
-const drawBars = array => {
+const drawBars = (array, LENGTH) => {
   // grab and clear the container
   let sortContainer = document.querySelector('.sort_container');
   sortContainer.innerHTML = '';
@@ -34,7 +34,7 @@ const drawBars = array => {
   array.forEach(arrayElement => {
     let sortBarElement = document.createElement('div');
     sortBarElement.classList.add('sort_bar');
-    let height = 300 * (arrayElement / 100);
+    let height = 300 * (arrayElement / LENGTH);
     sortBarElement.style.height = `${height}px`;
     sortContainer.appendChild(sortBarElement);
   });
@@ -60,18 +60,23 @@ function* bubbleSort(array) {
       break;
     }
 
+    // return the array
     yield array;
   }
 }
 
 // initialize an unsorted array
-let array = sortedArrayFactory(100);
+const LENGTH = 10;
+let array = sortedArrayFactory(LENGTH);
 array = shuffleArray(array);
 let generator = bubbleSort(array);
-drawBars(array);
+drawBars(array, LENGTH);
 
 // event to step through the array
 let stepButton = document.querySelector('#step');
 stepButton.addEventListener('click', _ => {
-  drawBars(generator.next().value);
+  let genOutput = generator.next();
+  if (!genOutput.done) {
+    drawBars(genOutput.value, LENGTH);
+  }
 });
