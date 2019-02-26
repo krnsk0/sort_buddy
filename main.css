@@ -1,0 +1,12 @@
+.sort_container {
+  height: 300px;
+  display: flex;
+  background-color: lightgrey;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.sort_bar {
+  background-color: black;
+  width: 100%;
+}
