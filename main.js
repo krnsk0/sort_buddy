@@ -1,5 +1,5 @@
-function randomArrayFactory(length) {
-  return Array.from({ length: length }, _ => Math.floor(Math.random() * 100));
+function sortedArrayFactory(length) {
+  return Array.from({ length: length }, (_, i) => i);
 }
 
 function drawBars(array) {
@@ -13,5 +13,5 @@ function drawBars(array) {
   });
 }
 
-let array = randomArrayFactory(100);
+let array = sortedArrayFactory(100);
 drawBars(array);
