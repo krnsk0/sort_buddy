@@ -1,8 +1,8 @@
-function sortedArrayFactory(length) {
+const sortedArrayFactory = length => {
   return Array.from({ length: length }, (_, i) => i);
-}
+};
 
-function drawBars(array) {
+const drawBars = array => {
   let sortContainer = document.querySelector('.sort_container');
   array.forEach(arrayElement => {
     let sortBarElement = document.createElement('div');
@@ -11,7 +11,7 @@ function drawBars(array) {
     sortBarElement.style.height = `${height}px`;
     sortContainer.appendChild(sortBarElement);
   });
-}
+};
 
 let array = sortedArrayFactory(100);
 drawBars(array);
