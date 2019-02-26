@@ -86,18 +86,17 @@ function* bubbleSort(array) {
     if (!swap) {
       // mark all states as sorted
       for (let x = 0; x < array.length; x += 1) {
-        array[i].state = 'sorted';
+        array[x].state = 'sorted';
       }
 
       // quit
-      break;
+      return array;
     }
   }
-  yield array;
 }
 
 // initialize an unsorted array
-const LENGTH = 20;
+const LENGTH = 10;
 let array = sortedArrayFactory(LENGTH);
 array = shuffleArray(array);
 let generator = bubbleSort(array);
@@ -107,7 +106,14 @@ drawBars(array, LENGTH);
 let stepButton = document.querySelector('#step');
 stepButton.addEventListener('click', _ => {
   let genOutput = generator.next();
+
+  // if generator unfinished, draw
   if (!genOutput.done) {
+    drawBars(genOutput.value, LENGTH);
+
+    // if generator finished, draw and disable button
+  } else {
+    stepButton.disabled = true;
     drawBars(genOutput.value, LENGTH);
   }
 });
