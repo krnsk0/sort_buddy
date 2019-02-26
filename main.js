@@ -64,10 +64,12 @@ function* bubbleSort(array) {
   }
 }
 
+// initialize an unsorted array
 let array = sortedArrayFactory(100);
 array = shuffleArray(array);
 let generator = bubbleSort(array);
 
+// event to step through the array
 let stepButton = document.querySelector('#step');
 stepButton.addEventListener('click', _ => {
   let array = generator.next().value;
