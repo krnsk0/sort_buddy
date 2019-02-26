@@ -68,6 +68,7 @@ function* bubbleSort(array) {
 let array = sortedArrayFactory(100);
 array = shuffleArray(array);
 let generator = bubbleSort(array);
+drawBars(array);
 
 // event to step through the array
 let stepButton = document.querySelector('#step');
