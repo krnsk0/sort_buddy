@@ -95,16 +95,21 @@ function* bubbleSort(array) {
   }
 }
 
-// initialize an unsorted array
-const LENGTH = 10;
+// get the buttons
+const stepButton = document.querySelector('#step');
+const resetButton = document.querySelector('#reset');
+
+// initialize everything
+const LENGTH = 20;
 let array = sortedArrayFactory(LENGTH);
 array = shuffleArray(array);
-let generator = bubbleSort(array);
 drawBars(array, LENGTH);
+stepButton.disabled = false;
+let generator = bubbleSort(array);
 
-// event handler to step through the array
-let stepButton = document.querySelector('#step');
+// event handler for step button click
 stepButton.addEventListener('click', _ => {
+  // advance the generator by one step
   let genOutput = generator.next();
 
   // if generator unfinished, draw
@@ -116,4 +121,13 @@ stepButton.addEventListener('click', _ => {
     stepButton.disabled = true;
     drawBars(genOutput.value, LENGTH);
   }
+});
+
+// event handler for reset button click
+resetButton.addEventListener('click', _ => {
+  array = sortedArrayFactory(LENGTH);
+  array = shuffleArray(array);
+  drawBars(array, LENGTH);
+  stepButton.disabled = false;
+  generator = bubbleSort(array);
 });
