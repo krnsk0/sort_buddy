@@ -1,9 +1,42 @@
+body {
+  margin: 0px;
+}
+
+header {
+  display: flex;
+  background-color: darkgrey;
+  justify-content: space-between;
+}
+
+h2.title {
+  font-family: Arial, sans-serif;
+  margin-left: 30px;
+}
+div.button_container {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+
 .sort_container {
-  height: 300px;
+  margin: 20px;
+  height: 250px;
   display: flex;
   background-color: lightgrey;
   flex-direction: row;
   align-items: flex-end;
+}
+
+.sort_container_label {
+  font-family: Arial, sans-serif;
+  background-color: darkgrey;
+  color: white;
+  margin: 20px;
+  position: relative;
+  top: -62px;
+  left: 15px;
+  font-size: 20px;
+  padding: 5px;
 }
 
 .sort_bar {
@@ -13,5 +46,7 @@
 input[type='button'] {
   border: 1px solid black;
   margin: 5px;
-  font-size: 16px;
+  font-size: 13px;
+  background-color: transparent;
+  height: 60%;
 }

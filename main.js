@@ -29,7 +29,7 @@ const drawBars = (array, LENGTH) => {
     sortBarElement.classList.add('sort_bar');
 
     // add height
-    let height = 300 * (arrayElement.value / LENGTH);
+    let height = 250 * (arrayElement.value / LENGTH);
     sortBarElement.style.height = `${height}px`;
 
     // add color
