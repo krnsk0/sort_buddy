@@ -1,4 +1,7 @@
+/* eslint-disable no-undef */
+// https://www.toptal.com/developers/sorting-algorithms
 'use strict';
+const algos = ['bubble', 'insertion', 'quick', 'selection', 'merge', 'heap'];
 
 // make a sorted array from 1 to length
 const sortedArrayFactory = length => {
@@ -18,82 +21,36 @@ const shuffleArray = array => {
 
 // render the bars
 const drawBars = (array, LENGTH) => {
-  // grab and clear the container
-  let sortContainer = document.querySelector('.sort_container#bubble');
-  sortContainer.innerHTML = '';
+  // loop through sort containers
+  const containers = document.querySelectorAll('.sort_container');
+  containers.forEach(function(container) {
+    // clear the container
+    this.innerHTML = '';
 
-  // render each bar and add it
-  array.forEach(arrayElement => {
-    // create the element
-    let sortBarElement = document.createElement('div');
-    sortBarElement.classList.add('sort_bar');
+    // render each bar and add it
+    array.forEach(arrayElement => {
+      // create the element
+      let sortBarElement = document.createElement('div');
+      sortBarElement.classList.add('sort_bar');
 
-    // add height
-    let height = 250 * (arrayElement.value / LENGTH);
-    sortBarElement.style.height = `${height}px`;
+      // add height
+      let height = 250 * (arrayElement.value / LENGTH);
+      sortBarElement.style.height = `${height}px`;
 
-    // add color
-    let colors = {
-      unsorted: 'black',
-      comparing: 'CornflowerBlue',
-      swapping: 'CornflowerBlue',
-      sorted: 'DeepSkyBlue'
-    };
-    sortBarElement.style.backgroundColor = colors[arrayElement.state];
+      // add color
+      let colors = {
+        unsorted: 'black',
+        comparing: 'CornflowerBlue',
+        swapping: 'CornflowerBlue',
+        sorted: 'DeepSkyBlue'
+      };
+      sortBarElement.style.backgroundColor = colors[arrayElement.state];
 
-    // append
-    sortContainer.appendChild(sortBarElement);
+      // append
+      sortContainer.appendChild(sortBarElement);
+    });
   });
 };
-
-function* bubbleSort(array) {
-  // outer loop from end to start
-  for (let i = array.length - 1; i >= 0; i -= 1) {
-    // a flag to track whether we've swapped on this loop
-    let swap = false;
-
-    // inner loop that does the comparison
-    for (let j = 0; j < i; j += 1) {
-      // mark elements as comparing
-      array[j].state = 'comparing';
-      array[j + 1].state = 'comparing';
-
-      // check if we need to swap and do it
-      if (array[j].value > array[j + 1].value) {
-        // set swap to true
-        swap = true;
-
-        // mark elements as swapping
-        array[j].state = 'swapping';
-        array[j + 1].state = 'swapping';
-
-        // do the swap
-        [array[j], array[j + 1]] = [array[j + 1], array[j]];
-      }
-
-      // yield the array for drawing & pause
-      yield array;
-
-      // clear the element state
-      array[j].state = 'unsorted';
-      array[j + 1].state = 'unsorted';
-    }
-
-    // set the top element as sorted
-    array[i].state = 'sorted';
-
-    // quit outer loop if we didn't do any swaps
-    if (!swap) {
-      // mark all states as sorted
-      for (let x = 0; x < array.length; x += 1) {
-        array[x].state = 'sorted';
-      }
-
-      // quit
-      return array;
-    }
-  }
-}
 
 // get the buttons
 const stepButton = document.querySelector('#step');
@@ -125,7 +82,7 @@ const step = () => {
 
 // spacebar
 document.addEventListener('keypress', event => {
-  if (event.keyCode === 32) {
+  if (event.keyCode === 32 && stepButton.disabled === false) {
     step();
   }
 });
