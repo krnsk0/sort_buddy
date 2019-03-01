@@ -1,15 +1,20 @@
+* {
+  font-family: 'Press Start 2P', cursive;
+}
 body {
   margin: 0px;
+  padding: 0px;
+  background-color: black;
 }
 
 header {
   display: flex;
-  background-color: darkgrey;
+  background-color: #686f70;
+  color: #fbfbfb;
   justify-content: space-between;
 }
 
 h2.title {
-  font-family: Arial, sans-serif;
   margin-left: 30px;
 }
 div.button_container {
@@ -18,23 +23,31 @@ div.button_container {
   margin-right: 30px;
 }
 
+.body_columns_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: ;
+  width: 100%;
+}
+.body_column {
+  flex: 1;
+}
+
 .sort_container {
-  margin: 20px;
   height: 250px;
   display: flex;
-  background-color: lightgrey;
+  background-color: lightsteelblue;
   flex-direction: row;
   align-items: flex-end;
+  margin: 10px;
 }
 
 .sort_container_label {
-  font-family: Arial, sans-serif;
-  background-color: darkgrey;
-  color: white;
-  margin: 20px;
-  position: relative;
-  top: -62px;
-  left: 15px;
+  background-color: #686f70;
+  color: #fbfbfb;
+  margin-top: 215px;
+  margin-left: 25px;
+  position: absolute;
   font-size: 20px;
   padding: 5px;
 }
@@ -44,7 +57,8 @@ div.button_container {
 }
 
 input[type='button'] {
-  border: 1px solid black;
+  border: 1px solid #fbfbfb;
+  color: #fbfbfb;
   margin: 5px;
   font-size: 13px;
   background-color: transparent;

@@ -19,7 +19,7 @@ const shuffleArray = array => {
 // render the bars
 const drawBars = (array, LENGTH) => {
   // grab and clear the container
-  let sortContainer = document.querySelector('.sort_container');
+  let sortContainer = document.querySelector('.sort_container#bubble');
   sortContainer.innerHTML = '';
 
   // render each bar and add it
@@ -35,9 +35,9 @@ const drawBars = (array, LENGTH) => {
     // add color
     let colors = {
       unsorted: 'black',
-      comparing: 'darkred',
-      swapping: 'red',
-      sorted: 'green'
+      comparing: 'CornflowerBlue',
+      swapping: 'CornflowerBlue',
+      sorted: 'DeepSkyBlue'
     };
     sortBarElement.style.backgroundColor = colors[arrayElement.state];
 
