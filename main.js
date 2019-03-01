@@ -107,8 +107,8 @@ drawBars(array, LENGTH);
 stepButton.disabled = false;
 let generator = bubbleSort(array);
 
-// event handler for step button click
-stepButton.addEventListener('click', _ => {
+// step function
+const step = () => {
   // advance the generator by one step
   let genOutput = generator.next();
 
@@ -121,6 +121,18 @@ stepButton.addEventListener('click', _ => {
     stepButton.disabled = true;
     drawBars(genOutput.value, LENGTH);
   }
+};
+
+// spacebar
+document.addEventListener('keypress', event => {
+  if (event.keyCode === 32) {
+    step();
+  }
+});
+
+// event handler for step button click
+stepButton.addEventListener('click', _ => {
+  step();
 });
 
 // event handler for reset button click
