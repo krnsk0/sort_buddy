@@ -26,11 +26,21 @@ div.button_container {
 .body_columns_container {
   display: flex;
   flex-direction: row;
-  justify-content: ;
+  justify-content: center;
   width: 100%;
 }
 .body_column {
   flex: 1;
+}
+.body_column.left {
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 5px;
+}
+.body_column.right {
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 10px;
 }
 
 .sort_container {
@@ -39,7 +49,8 @@ div.button_container {
   background-color: lightsteelblue;
   flex-direction: row;
   align-items: flex-end;
-  margin: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .sort_container_label {
