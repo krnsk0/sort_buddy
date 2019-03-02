@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-function* bubbleSort(array) {
+function* bubble(array) {
   // outer loop from end to start
   for (let i = array.length - 1; i >= 0; i -= 1) {
     // a flag to track whether we've swapped on this loop
@@ -25,7 +25,7 @@ function* bubbleSort(array) {
       }
 
       // yield the array for drawing & pause
-      yield array;
+      yield;
 
       // clear the element state
       array[j].state = 'unsorted';
@@ -43,7 +43,7 @@ function* bubbleSort(array) {
       }
 
       // quit
-      return array;
+      return;
     }
   }
 }

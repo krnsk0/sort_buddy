@@ -1,0 +1,3 @@
+fix end state generator behavior
+change sort box height to flexible
+change how clearing container to allow floated labels
