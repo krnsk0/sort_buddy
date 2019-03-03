@@ -31,6 +31,8 @@ div.button_container {
 }
 .body_column {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .body_column.left {
   padding-top: 5px;
@@ -44,7 +46,7 @@ div.button_container {
 }
 
 .sort_container {
-  height: 250px;
+  height: 200px;
   display: flex;
   background-color: lightsteelblue;
   flex-direction: row;
@@ -56,8 +58,8 @@ div.button_container {
 .sort_container_label {
   background-color: #686f70;
   color: #fbfbfb;
-  margin-top: 215px;
-  margin-left: 25px;
+  margin-top: -20px;
+  margin-left: 20px;
   position: absolute;
   font-size: 20px;
   padding: 5px;

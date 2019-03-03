@@ -22,8 +22,9 @@ const drawBars = () => {
     // get the container for this algo
     let container = document.querySelector(`#${stateObj.name}`);
 
-    // clear the container
-    container.innerHTML = '';
+    // delete old bars
+    let bars = container.querySelectorAll('div');
+    bars.forEach(element => element.parentNode.removeChild(element));
 
     stateObj.array.forEach(arrayElement => {
       // create the element
@@ -31,8 +32,8 @@ const drawBars = () => {
       sortBarElement.classList.add('sort_bar');
 
       // add height
-      let height = 250 * (arrayElement.value / stateObj.array.length);
-      sortBarElement.style.height = `${height}px`;
+      let height = 100 * (arrayElement.value / stateObj.array.length);
+      sortBarElement.style.height = `${height}%`;
 
       // add color
       let colors = {
@@ -49,11 +50,11 @@ const drawBars = () => {
   });
 };
 
-// the initialize function
+// this is called on page load and on reset button click
 const initialize = () => {
   // create an unsorted array
-  const LENGTH = 20;
-  let unsortedArray = shuffleArray(sortedArrayFactory(LENGTH));
+  let length = 20;
+  let unsortedArray = shuffleArray(sortedArrayFactory(length));
 
   // store a copy in each state object
   state.forEach(stateObj => {
