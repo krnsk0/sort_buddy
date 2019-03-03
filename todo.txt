@@ -1,3 +1,5 @@
-fix end state generator behavior
-change sort box height to flexible
-change how clearing container to allow floated labels
+add vertical flex to boxes
+finish insertion sort
+finish merge sort
+finish quick sort
+finish heap sort
