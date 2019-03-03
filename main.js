@@ -1,6 +1,12 @@
-'use strict';
 /* eslint-disable no-undef */
-// https://www.toptal.com/developers/sorting-algorithms
+'use strict';
+// preferences
+const COLORS = {
+  unsorted: 'DarkSlateBlue',
+  comparing: 'CornflowerBlue',
+  sorted: 'DeepSkyBlue'
+};
+const LENGTH = 100;
 
 // store some references to elements as globals
 const stepButton = document.querySelector('#step');
@@ -26,23 +32,18 @@ const drawBars = () => {
     let bars = container.querySelectorAll('div');
     bars.forEach(element => element.parentNode.removeChild(element));
 
+    // loop through the data array for this sorting algo
     stateObj.array.forEach(arrayElement => {
-      // create the element
+      // create a bar div element
       let sortBarElement = document.createElement('div');
       sortBarElement.classList.add('sort_bar');
 
-      // add height
+      // add height property
       let height = 100 * (arrayElement.value / stateObj.array.length);
       sortBarElement.style.height = `${height}%`;
 
       // add color
-      let colors = {
-        unsorted: 'DarkSlateBlue',
-        comparing: 'CornflowerBlue',
-        swapping: 'CornflowerBlue',
-        sorted: 'DeepSkyBlue'
-      };
-      sortBarElement.style.backgroundColor = colors[arrayElement.state];
+      sortBarElement.style.backgroundColor = COLORS[arrayElement.state];
 
       // append
       container.appendChild(sortBarElement);
@@ -53,8 +54,7 @@ const drawBars = () => {
 // this is called on page load and on reset button click
 const initialize = () => {
   // create an unsorted array
-  let length = 20;
-  let unsortedArray = shuffleArray(sortedArrayFactory(length));
+  let unsortedArray = shuffleArray(sortedArrayFactory(LENGTH));
 
   // store a copy in each state object
   state.forEach(stateObj => {

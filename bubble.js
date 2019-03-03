@@ -11,21 +11,17 @@ function* bubble(array) {
       array[j].state = 'comparing';
       array[j + 1].state = 'comparing';
 
+      // pause
+      yield;
+
       // check if we need to swap and do it
       if (array[j].value > array[j + 1].value) {
         // set swap to true
         swap = true;
 
-        // mark elements as swapping
-        array[j].state = 'swapping';
-        array[j + 1].state = 'swapping';
-
         // do the swap
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
       }
-
-      // yield the array for drawing & pause
-      yield;
 
       // clear the element state
       array[j].state = 'unsorted';
