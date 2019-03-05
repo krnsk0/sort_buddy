@@ -23,3 +23,11 @@ const copyState = array => {
   }
   return output;
 };
+
+const arrayFlatten = array => {
+  return array.map(x => x.value);
+};
+
+const swap = (array, a, b) => {
+  [array[b], array[a]] = [array[a], array[b]];
+};
