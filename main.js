@@ -76,7 +76,7 @@ const step = () => {
   // loop through the state object
   state.forEach(stateObj => {
     // call this generator's next()
-    let genOutputObject = stateObj.generator.next();
+    stateObj.generator.next();
 
     // call draw
     drawBars();
