@@ -1,9 +1,10 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 function* bubble(array) {
   // outer loop from end to start
   for (let i = array.length - 1; i >= 0; i -= 1) {
     // a flag to track whether we've swapped on this loop
-    let swap = false;
+    let swapFlag = false;
 
     // inner loop that does the comparison
     for (let j = 0; j < i; j += 1) {
@@ -17,10 +18,10 @@ function* bubble(array) {
       // check if we need to swap and do it
       if (array[j].value > array[j + 1].value) {
         // set swap to true
-        swap = true;
+        swapFlag = true;
 
         // do the swap
-        [array[j], array[j + 1]] = [array[j + 1], array[j]];
+        swap(array, j, j + 1);
       }
 
       // clear the element state
@@ -32,7 +33,7 @@ function* bubble(array) {
     array[i].state = 'sorted';
 
     // quit outer loop if we didn't do any swaps
-    if (!swap) {
+    if (!swapFlag) {
       // mark all states as sorted
       for (let x = 0; x < array.length; x += 1) {
         array[x].state = 'sorted';

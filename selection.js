@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 function* selection(array) {
   // outer loop from start to end
   for (let i = 0; i < array.length; i += 1) {
@@ -29,9 +31,7 @@ function* selection(array) {
     // if we found a new minumum
     // swap with the outer loop index
     if (minIndex !== i) {
-      let temp = array[minIndex];
-      array[minIndex] = array[i];
-      array[i] = temp;
+      swap(array, minIndex, i);
     }
     // set the top element as sorted
     array[i].state = 'sorted';
