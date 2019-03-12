@@ -6,7 +6,7 @@ const COLORS = {
   comparing: 'CornflowerBlue',
   sorted: 'DeepSkyBlue'
 };
-const LENGTH = 10;
+const LENGTH = 25;
 
 // store some references to elements as globals
 const stepButton = document.querySelector('#step');
