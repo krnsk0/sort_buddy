@@ -4,7 +4,6 @@ function* insertion(array) {
   for (let i = 0; i < array.length; i += 1) {
     // inner loop goes backwards from i to zero
     for (let j = i - 1; j >= 0; j -= 1) {
-
       // display comparison
       array[j].state = 'comparing';
       array[j + 1].state = 'comparing';
