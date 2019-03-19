@@ -32,15 +32,26 @@ const drawBars = () => {
     let bars = container.querySelectorAll('div');
     bars.forEach(element => element.parentNode.removeChild(element));
 
+    // get container height and width
+    const containerWidth = window.getComputedStyle(container).width;
+
     // loop through the data array for this sorting algo
-    stateObj.array.forEach(arrayElement => {
+    stateObj.array.forEach((arrayElement, positionIndex) => {
       // create a bar div element
       let sortBarElement = document.createElement('div');
       sortBarElement.classList.add('sort_bar');
 
       // add height property
-      let height = 100 * (arrayElement.value / stateObj.array.length);
-      sortBarElement.style.height = `${height}%`;
+      let heightPercentage = 100 * (arrayElement.value / stateObj.array.length);
+      sortBarElement.style.height = `${heightPercentage}%`;
+
+      // add width and left start point property
+      let numberOfElements = stateObj.array.length;
+      let widthPercentage = 100 * (1 / numberOfElements);
+      sortBarElement.style.width = `${widthPercentage}%`;
+      let startPosition = containerWidth * positionIndex;
+      sortBarElement.style.left = `${startPosition}px`;
+      sortBarElement.style.top = '0px';
 
       // add color
       sortBarElement.style.backgroundColor = COLORS[arrayElement.state];

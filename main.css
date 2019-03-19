@@ -47,10 +47,10 @@ div.button_container {
 
 .sort_container {
   height: 200px;
-  display: flex;
-  background-color: lightsteelblue;
+  /* display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-end; */
+  background-color: lightsteelblue;
   margin-top: 5px;
   margin-bottom: 10px;
 }
@@ -66,7 +66,9 @@ div.button_container {
 }
 
 .sort_bar {
-  width: 100%;
+  /* width: 100%; */
+  position: relative;
+  display: inline-block;
 }
 
 input[type='button'] {
