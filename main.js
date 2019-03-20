@@ -13,8 +13,6 @@ const stepButton = document.querySelector('#step');
 const resetButton = document.querySelector('#reset');
 
 // set up an iterable state array
-// that contains objects representing the state of each
-// sorting algo and its corresopnding data
 const algos = ['bubble', 'insertion', 'quick', 'selection', 'merge', 'heap'];
 const state = [];
 algos.forEach(algoName => {
@@ -45,18 +43,18 @@ const drawBars = () => {
       let heightPercentage = 100 * (arrayElement.value / stateObj.array.length);
       sortBarElement.style.height = `${heightPercentage}%`;
 
-      // add width and left start point property
+      // add width
       let numberOfElements = stateObj.array.length;
       let widthPercentage = 100 * (1 / numberOfElements);
       sortBarElement.style.width = `${widthPercentage}%`;
+
+      // left start point
       let startPosition = containerWidth * positionIndex;
       sortBarElement.style.left = `${startPosition}px`;
       sortBarElement.style.top = '0px';
 
-      // add color
+      // add color, append
       sortBarElement.style.backgroundColor = COLORS[arrayElement.state];
-
-      // append
       container.appendChild(sortBarElement);
     });
   });
