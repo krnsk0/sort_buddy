@@ -47,22 +47,21 @@ div.button_container {
 
 .sort_container {
   height: 200px;
-  /* display: flex;
-  flex-direction: row;
-  align-items: flex-end; */
   background-color: lightsteelblue;
   margin-top: 5px;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .sort_container_label {
   background-color: #686f70;
   color: #fbfbfb;
-  margin-top: -20px;
-  margin-left: 20px;
+  bottom: 10px;
+  right: 10px;
   position: absolute;
   font-size: 20px;
   padding: 5px;
+  z-index: 99;
 }
 
 .sort_bar {
