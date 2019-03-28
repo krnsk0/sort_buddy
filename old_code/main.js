@@ -38,6 +38,8 @@ const drawBars = () => {
       // create a bar div element
       let sortBarElement = document.createElement('div');
       sortBarElement.classList.add('sort_bar');
+      sortBarElement.classList.add(stateObj.name);
+      sortBarElement.classList.add('_' + arrayElement.value);
 
       // add height property
       let heightPercentage = 100 * (arrayElement.value / stateObj.array.length);
@@ -48,10 +50,9 @@ const drawBars = () => {
       let widthPercentage = 100 * (1 / numberOfElements);
       sortBarElement.style.width = `${widthPercentage}%`;
 
-      // left start point
-      let startPosition = containerWidth * positionIndex;
-      sortBarElement.style.left = `${startPosition}px`;
-      sortBarElement.style.top = '0px';
+      // left start point - broken
+      // let startPosition = containerWidth * positionIndex;
+      // sortBarElement.style.left = `${startPosition}px`;
 
       // add color, append
       sortBarElement.style.backgroundColor = COLORS[arrayElement.state];
@@ -104,3 +105,23 @@ resetButton.addEventListener('click', _ => {
 
 // start your engines!
 initialize();
+
+/*
+action: {
+  type: 'SWAP', 'COMPARE', 'CLEAR', 'SORT'
+  key1: number
+  key2: number
+  algo: algoName
+}
+*/
+
+const swapElements = (algoName, key1, key2) => {
+  const div1 = document.querySelector(`.${algoName}._${key1}`);
+  const div1left = div1.getClientRects()[0].left;
+
+  const div2 = document.querySelector(`.${algoName}._${key1}`);
+  const div2left = div2.getClientRects()[0].left;
+
+  return div1;
+};
+// let d = swapElements('bubble', 2, 15);
