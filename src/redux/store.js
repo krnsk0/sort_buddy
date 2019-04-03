@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
+// utilities
 const sortedArrayFactory = length => {
   return Array.from({ length: length }, (_, i) => {
     return { value: i + 1, status: 'unsorted' };
@@ -15,11 +16,26 @@ const shuffleArray = array => {
   }
   return array;
 };
-
 const createNewArray = size => shuffleArray(sortedArrayFactory(size));
 
-const array = createNewArray(10);
+// action types
+export const RESET_ARRAY = 'RESET_ARRAY';
+export const STEP = 'STEP';
 
+// action creators
+export const resetArray = size => {
+  return {
+    type: RESET_ARRAY,
+    size
+  };
+};
+export const step = () => {
+  return {
+    type: STEP
+  };
+};
+// reducer
+const array = createNewArray(10);
 const initialState = {
   bubbleSort: [...array],
   selectionSort: [...array],
@@ -29,9 +45,22 @@ const initialState = {
   quickSort: [...array]
 };
 const reducer = (state = initialState, action) => {
-  return state;
+  if (action.type === RESET_ARRAY) {
+    const newArray = createNewArray(action.size);
+    return {
+      bubbleSort: [...newArray],
+      selectionSort: [...newArray],
+      insertionSort: [...newArray],
+      mergeSort: [...newArray],
+      heapSort: [...newArray],
+      quickSort: [...newArray]
+    };
+  } else {
+    return state;
+  }
 };
 
+// create store
 export default createStore(
   reducer,
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

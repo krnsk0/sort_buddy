@@ -7,7 +7,7 @@ class disconnectedApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Topbar />
+        <Topbar reset={() => this.props.reset(10)} />
         <div className="body-column-container">
           <div className="body-column">
             <SortBox name="bubbleSort" arrays={this.props.arrays} />

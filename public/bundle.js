@@ -36563,7 +36563,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -41802,10 +41802,14 @@ var disconnectedApp = function (_React$Component) {
   _createClass(disconnectedApp, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         { className: 'app' },
-        _react2.default.createElement(_Topbar2.default, null),
+        _react2.default.createElement(_Topbar2.default, { reset: function reset() {
+            return _this2.props.reset(10);
+          } }),
         _react2.default.createElement(
           'div',
           { className: 'body-column-container' },
@@ -41950,39 +41954,85 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _store = __webpack_require__(/*! ../redux/store */ "./src/redux/store.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Topbar = function Topbar(props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "topbar" },
-    _react2.default.createElement(
-      "span",
-      { className: "title" },
-      "sort_buddy"
-    ),
-    _react2.default.createElement(
-      "span",
-      { className: "topbar-link-container" },
-      _react2.default.createElement(
-        "a",
-        { href: "", className: "topbar-link" },
-        "step"
-      ),
-      _react2.default.createElement(
-        "a",
-        { href: "", className: "topbar-link" },
-        "reset"
-      )
-    )
-  );
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var disconnectedTopbar = function (_React$Component) {
+  _inherits(disconnectedTopbar, _React$Component);
+
+  function disconnectedTopbar() {
+    _classCallCheck(this, disconnectedTopbar);
+
+    return _possibleConstructorReturn(this, (disconnectedTopbar.__proto__ || Object.getPrototypeOf(disconnectedTopbar)).apply(this, arguments));
+  }
+
+  _createClass(disconnectedTopbar, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'topbar' },
+        _react2.default.createElement(
+          'span',
+          { className: 'title' },
+          'sort_buddy'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'topbar-link-container' },
+          _react2.default.createElement(
+            'a',
+            { href: '#0', onClick: this.props.step, className: 'topbar-link' },
+            'step'
+          ),
+          _react2.default.createElement(
+            'a',
+            {
+              href: '#0',
+              onClick: function onClick() {
+                return _this2.props.reset(10);
+              },
+              className: 'topbar-link'
+            },
+            'reset'
+          )
+        )
+      );
+    }
+  }]);
+
+  return disconnectedTopbar;
+}(_react2.default.Component);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    reset: function reset(size) {
+      return dispatch((0, _store.resetArray)(size));
+    },
+    step: function step() {
+      return dispatch((0, _store.step)());
+    }
+  };
 };
 
-exports.default = Topbar;
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(disconnectedTopbar);
 
 /***/ }),
 
@@ -42019,7 +42069,7 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
-  _reactRouterDom.HashRouter,
+  _reactRouterDom.BrowserRouter,
   null,
   _react2.default.createElement(
     _reactRedux.Provider,
@@ -42043,6 +42093,7 @@ _reactDom2.default.render(_react2.default.createElement(
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.step = exports.resetArray = exports.STEP = exports.RESET_ARRAY = undefined;
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
@@ -42056,6 +42107,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+// utilities
 var sortedArrayFactory = function sortedArrayFactory(length) {
   return Array.from({ length: length }, function (_, i) {
     return { value: i + 1, status: 'unsorted' };
@@ -42071,13 +42123,28 @@ var shuffleArray = function shuffleArray(array) {
   }
   return array;
 };
-
 var createNewArray = function createNewArray(size) {
   return shuffleArray(sortedArrayFactory(size));
 };
 
-var array = createNewArray(10);
+// action types
+var RESET_ARRAY = exports.RESET_ARRAY = 'RESET_ARRAY';
+var STEP = exports.STEP = 'STEP';
 
+// action creators
+var resetArray = exports.resetArray = function resetArray(size) {
+  return {
+    type: RESET_ARRAY,
+    size: size
+  };
+};
+var step = exports.step = function step() {
+  return {
+    type: STEP
+  };
+};
+// reducer
+var array = createNewArray(10);
 var initialState = {
   bubbleSort: [].concat(_toConsumableArray(array)),
   selectionSort: [].concat(_toConsumableArray(array)),
@@ -42090,9 +42157,22 @@ var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments[1];
 
-  return state;
+  if (action.type === RESET_ARRAY) {
+    var newArray = createNewArray(action.size);
+    return {
+      bubbleSort: [].concat(_toConsumableArray(newArray)),
+      selectionSort: [].concat(_toConsumableArray(newArray)),
+      insertionSort: [].concat(_toConsumableArray(newArray)),
+      mergeSort: [].concat(_toConsumableArray(newArray)),
+      heapSort: [].concat(_toConsumableArray(newArray)),
+      quickSort: [].concat(_toConsumableArray(newArray))
+    };
+  } else {
+    return state;
+  }
 };
 
+// create store
 exports.default = (0, _redux.createStore)(reducer, (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger.createLogger)({ collapsed: true })));
 
 /***/ }),
