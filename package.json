@@ -1,7 +1,6 @@
 {
-  "name": "frontend_boilerplate",
+  "name": "sort_buddy",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -32,5 +31,14 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krnsk0/sort_buddy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/krnsk0/sort_buddy/issues"
+  },
+  "homepage": "https://github.com/krnsk0/sort_buddy#readme",
+  "description": ""
 }
