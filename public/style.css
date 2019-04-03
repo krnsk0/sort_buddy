@@ -1,0 +1,50 @@
+/* global */
+* {
+  font-family: 'Press Start 2P', monospace;
+  box-sizing: border-box;
+}
+.app {
+  margin: 10px;
+  background-color: white;
+}
+
+/* Top bar */
+.topbar {
+  border: 1px black solid;
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  font-size: 20px;
+  margin: 5px;
+}
+.topbar-link-container {
+  font-size: 20px;
+  margin: 5px;
+}
+.topbar-link {
+  margin-left: 15px;
+}
+
+/* body flexboxes */
+.body-column-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.body-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 49.5%;
+}
+.sort-container {
+  height: 200px;
+  border: 1px solid black;
+  margin-top: 5px;
+}
+.sort-bar {
+  background-color: grey;
+  width: 10%;
+  display: inline-block;
+}
