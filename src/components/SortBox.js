@@ -6,12 +6,15 @@ class SortBox extends React.Component {
   render() {
     const array = this.props.arrays[this.props.name];
     return (
-      <div className="sort-container">
-        <FlipMove typeName={null}>
-          {array.map(el => (
-            <SortBar key={el.value} value={el.value} status={el.status} />
-          ))}
-        </FlipMove>
+      <div className="sort-container-outer">
+        <div className="sort-container-label">{this.props.displayName}</div>
+        <div className="sort-container">
+          <FlipMove typeName={null} duration={250}>
+            {array.map(el => (
+              <SortBar key={el.value} value={el.value} status={el.status} />
+            ))}
+          </FlipMove>
+        </div>
       </div>
     );
   }

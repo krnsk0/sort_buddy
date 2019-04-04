@@ -7,7 +7,11 @@ class SortBar extends React.Component {
     const divStyle = {
       height: `${height}%`
     };
-    return <div className="sort-bar" style={divStyle} />;
+    return (
+      <div className="sort-bar-container">
+        <div className="sort-bar" style={divStyle} />
+      </div>
+    );
   }
 }
 

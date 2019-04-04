@@ -10,13 +10,14 @@
 
 /* Top bar */
 .topbar {
-  border: 1px black solid;
+  background-color: black;
   display: flex;
   justify-content: space-between;
 }
 .title {
   font-size: 20px;
   margin: 5px;
+  color: white;
 }
 .topbar-link-container {
   font-size: 20px;
@@ -24,6 +25,7 @@
 }
 .topbar-link {
   margin-left: 15px;
+  color: red;
 }
 
 /* body flexboxes */
@@ -38,13 +40,32 @@
   justify-content: start;
   width: 49.5%;
 }
+.sort-container-outer {
+  margin-top: 10px;
+}
+.sort-container-label {
+  background-color: black;
+  color: white;
+  padding-left: 5px;
+  padding-top: 2px;
+}
 .sort-container {
   height: 200px;
   border: 1px solid black;
-  margin-top: 5px;
+  padding-left: 2px;
+}
+.sort-bar-container {
+  width: 10%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
 }
 .sort-bar {
-  background-color: grey;
-  width: 10%;
-  display: inline-block;
+  background-color: lightgray;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  position: absolute;
+  bottom: 0;
+  width: 95%;
 }

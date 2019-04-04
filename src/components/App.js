@@ -10,14 +10,38 @@ class disconnectedApp extends React.Component {
         <Topbar reset={() => this.props.reset(10)} />
         <div className="body-column-container">
           <div className="body-column">
-            <SortBox name="bubbleSort" arrays={this.props.arrays} />
-            <SortBox name="selectionSort" arrays={this.props.arrays} />
-            <SortBox name="insertionSort" arrays={this.props.arrays} />
+            <SortBox
+              name="bubbleSort"
+              displayName="bubble_sort"
+              arrays={this.props.arrays}
+            />
+            <SortBox
+              name="selectionSort"
+              displayName="selection_sort"
+              arrays={this.props.arrays}
+            />
+            <SortBox
+              name="insertionSort"
+              displayName="insertion_sort"
+              arrays={this.props.arrays}
+            />
           </div>
           <div className="body-column" arrays={this.props.arrays}>
-            <SortBox name="quickSort" arrays={this.props.arrays} />
-            <SortBox name="mergeSort" arrays={this.props.arrays} />
-            <SortBox name="heapSort" arrays={this.props.arrays} />
+            <SortBox
+              name="quickSort"
+              displayName="quick_sort"
+              arrays={this.props.arrays}
+            />
+            <SortBox
+              name="mergeSort"
+              displayName="merge_sort"
+              arrays={this.props.arrays}
+            />
+            <SortBox
+              name="heapSort"
+              displayName="heap_sort"
+              arrays={this.props.arrays}
+            />
           </div>
         </div>
       </div>
