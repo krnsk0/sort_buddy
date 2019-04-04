@@ -43276,16 +43276,40 @@ var disconnectedApp = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'body-column' },
-            _react2.default.createElement(_SortBox2.default, { name: 'bubbleSort', arrays: this.props.arrays }),
-            _react2.default.createElement(_SortBox2.default, { name: 'selectionSort', arrays: this.props.arrays }),
-            _react2.default.createElement(_SortBox2.default, { name: 'insertionSort', arrays: this.props.arrays })
+            _react2.default.createElement(_SortBox2.default, {
+              name: 'bubbleSort',
+              displayName: 'bubble_sort',
+              arrays: this.props.arrays
+            }),
+            _react2.default.createElement(_SortBox2.default, {
+              name: 'selectionSort',
+              displayName: 'selection_sort',
+              arrays: this.props.arrays
+            }),
+            _react2.default.createElement(_SortBox2.default, {
+              name: 'insertionSort',
+              displayName: 'insertion_sort',
+              arrays: this.props.arrays
+            })
           ),
           _react2.default.createElement(
             'div',
             { className: 'body-column', arrays: this.props.arrays },
-            _react2.default.createElement(_SortBox2.default, { name: 'quickSort', arrays: this.props.arrays }),
-            _react2.default.createElement(_SortBox2.default, { name: 'mergeSort', arrays: this.props.arrays }),
-            _react2.default.createElement(_SortBox2.default, { name: 'heapSort', arrays: this.props.arrays })
+            _react2.default.createElement(_SortBox2.default, {
+              name: 'quickSort',
+              displayName: 'quick_sort',
+              arrays: this.props.arrays
+            }),
+            _react2.default.createElement(_SortBox2.default, {
+              name: 'mergeSort',
+              displayName: 'merge_sort',
+              arrays: this.props.arrays
+            }),
+            _react2.default.createElement(_SortBox2.default, {
+              name: 'heapSort',
+              displayName: 'heap_sort',
+              arrays: this.props.arrays
+            })
           )
         )
       );
@@ -43350,7 +43374,11 @@ var SortBar = function (_React$Component) {
       var divStyle = {
         height: height + "%"
       };
-      return _react2.default.createElement("div", { className: "sort-bar", style: divStyle });
+      return _react2.default.createElement(
+        "div",
+        { className: "sort-bar-container" },
+        _react2.default.createElement("div", { className: "sort-bar", style: divStyle })
+      );
     }
   }]);
 
@@ -43412,13 +43440,22 @@ var SortBox = function (_React$Component) {
       var array = this.props.arrays[this.props.name];
       return _react2.default.createElement(
         'div',
-        { className: 'sort-container' },
+        { className: 'sort-container-outer' },
         _react2.default.createElement(
-          _reactFlipMove2.default,
-          { typeName: null },
-          array.map(function (el) {
-            return _react2.default.createElement(_SortBar2.default, { key: el.value, value: el.value, status: el.status });
-          })
+          'div',
+          { className: 'sort-container-label' },
+          this.props.displayName
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'sort-container' },
+          _react2.default.createElement(
+            _reactFlipMove2.default,
+            { typeName: null, duration: 250 },
+            array.map(function (el) {
+              return _react2.default.createElement(_SortBar2.default, { key: el.value, value: el.value, status: el.status });
+            })
+          )
         )
       );
     }
