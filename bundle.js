@@ -43370,7 +43370,7 @@ var SortBar = function (_React$Component) {
   _createClass(SortBar, [{
     key: "render",
     value: function render() {
-      var height = 100 * (this.props.value / this.props.arrayLength);
+      var height = 100 * (this.props.value / this.props.arrayLength) - 2;
       var sortBarStyle = {
         height: height + "%"
       };
@@ -43454,7 +43454,7 @@ var SortBox = function (_React$Component) {
           { className: 'sort-container' },
           _react2.default.createElement(
             _reactFlipMove2.default,
-            { typeName: null, duration: 250 },
+            { typeName: null, duration: 250, enterAnimation: 'none' },
             array.map(function (el) {
               return _react2.default.createElement(_SortBar2.default, {
                 key: el.value,
