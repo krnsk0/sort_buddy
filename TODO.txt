@@ -1,2 +1,0 @@
-turn off entry animations in react flip move
-fix react flip move error
