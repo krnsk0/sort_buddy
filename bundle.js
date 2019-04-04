@@ -43370,14 +43370,17 @@ var SortBar = function (_React$Component) {
   _createClass(SortBar, [{
     key: "render",
     value: function render() {
-      var height = 100 * (this.props.value / 10);
-      var divStyle = {
+      var height = 100 * (this.props.value / this.props.arrayLength);
+      var sortBarStyle = {
         height: height + "%"
+      };
+      var sortBarContainerStyle = {
+        width: 100 / this.props.arrayLength + "%"
       };
       return _react2.default.createElement(
         "div",
-        { className: "sort-bar-container" },
-        _react2.default.createElement("div", { className: "sort-bar", style: divStyle })
+        { className: "sort-bar-container", style: sortBarContainerStyle },
+        _react2.default.createElement("div", { className: "sort-bar", style: sortBarStyle })
       );
     }
   }]);
@@ -43453,7 +43456,12 @@ var SortBox = function (_React$Component) {
             _reactFlipMove2.default,
             { typeName: null, duration: 250 },
             array.map(function (el) {
-              return _react2.default.createElement(_SortBar2.default, { key: el.value, value: el.value, status: el.status });
+              return _react2.default.createElement(_SortBar2.default, {
+                key: el.value,
+                value: el.value,
+                status: el.status,
+                arrayLength: array.length
+              });
             })
           )
         )
@@ -43510,6 +43518,11 @@ var disconnectedTopbar = function (_React$Component) {
   }
 
   _createClass(disconnectedTopbar, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.reset(10);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -43672,14 +43685,13 @@ var step = exports.step = function step() {
   };
 };
 // reducer
-var array = createNewArray(10);
 var initialState = {
-  bubbleSort: [].concat(_toConsumableArray(array)),
-  selectionSort: [].concat(_toConsumableArray(array)),
-  insertionSort: [].concat(_toConsumableArray(array)),
-  mergeSort: [].concat(_toConsumableArray(array)),
-  heapSort: [].concat(_toConsumableArray(array)),
-  quickSort: [].concat(_toConsumableArray(array))
+  bubbleSort: [],
+  selectionSort: [],
+  insertionSort: [],
+  mergeSort: [],
+  heapSort: [],
+  quickSort: []
 };
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
