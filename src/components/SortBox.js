@@ -9,7 +9,7 @@ class SortBox extends React.Component {
       <div className="sort-container-outer">
         <div className="sort-container-label">{this.props.displayName}</div>
         <div className="sort-container">
-          <FlipMove typeName={null} duration={250}>
+          <FlipMove typeName={null} duration={250} enterAnimation="none">
             {array.map(el => (
               <SortBar
                 key={el.value}
