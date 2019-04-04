@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { resetArray, step } from '../redux/store';
 
 class disconnectedTopbar extends React.Component {
+  componentDidMount() {
+    this.props.reset(10);
+  }
+
   render() {
     return (
       <div className="topbar">

@@ -35,14 +35,13 @@ export const step = () => {
   };
 };
 // reducer
-const array = createNewArray(10);
 const initialState = {
-  bubbleSort: [...array],
-  selectionSort: [...array],
-  insertionSort: [...array],
-  mergeSort: [...array],
-  heapSort: [...array],
-  quickSort: [...array]
+  bubbleSort: [],
+  selectionSort: [],
+  insertionSort: [],
+  mergeSort: [],
+  heapSort: [],
+  quickSort: []
 };
 const reducer = (state = initialState, action) => {
   if (action.type === RESET_ARRAY) {

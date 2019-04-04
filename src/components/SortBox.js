@@ -11,7 +11,12 @@ class SortBox extends React.Component {
         <div className="sort-container">
           <FlipMove typeName={null} duration={250}>
             {array.map(el => (
-              <SortBar key={el.value} value={el.value} status={el.status} />
+              <SortBar
+                key={el.value}
+                value={el.value}
+                status={el.status}
+                arrayLength={array.length}
+              />
             ))}
           </FlipMove>
         </div>
