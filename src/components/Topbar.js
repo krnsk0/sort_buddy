@@ -13,10 +13,10 @@ class disconnectedTopbar extends React.Component {
         <span className="title">sort_buddy</span>
         <span className="topbar-link-container">
           <a href="#0" onClick={this.props.stepBack} className="topbar-link">
-            back
+            {'<<'}
           </a>
           <a href="#0" onClick={this.props.stepForward} className="topbar-link">
-            forward
+            {'>>'}
           </a>
           <a
             href="#0"
