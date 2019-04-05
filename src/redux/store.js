@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import sortedArrayFactory from '../algos/shuffledArrayFactory';
+import shuffledArrayFactory from '../algos/shuffledArrayFactory';
 import bubbleSort from '../algos/bubbleSort';
 
 // action types
@@ -22,23 +22,23 @@ export const step = () => {
 };
 // reducer
 const initialState = {
-  bubbleSort: [],
-  selectionSort: [],
-  insertionSort: [],
-  mergeSort: [],
-  heapSort: [],
-  quickSort: []
+  bubbleSort: { history: [], pointer: 0 },
+  selectionSort: { history: [], pointer: 0 },
+  insertionSort: { history: [], pointer: 0 },
+  mergeSort: { history: [], pointer: 0 },
+  heapSort: { history: [], pointer: 0 },
+  quickSort: { history: [], pointer: 0 }
 };
 const reducer = (state = initialState, action) => {
   if (action.type === RESET_ARRAY) {
-    const newArray = sortedArrayFactory(action.size);
+    const shuffledArray = shuffledArrayFactory(action.size);
     return {
-      bubbleSort: [...newArray],
-      selectionSort: [...newArray],
-      insertionSort: [...newArray],
-      mergeSort: [...newArray],
-      heapSort: [...newArray],
-      quickSort: [...newArray]
+      bubbleSort: { history: [[...shuffledArray]], pointer: 0 },
+      selectionSort: { history: [[...shuffledArray]], pointer: 0 },
+      insertionSort: { history: [[...shuffledArray]], pointer: 0 },
+      mergeSort: { history: [[...shuffledArray]], pointer: 0 },
+      heapSort: { history: [[...shuffledArray]], pointer: 0 },
+      quickSort: { history: [[...shuffledArray]], pointer: 0 }
     };
   } else {
     return state;

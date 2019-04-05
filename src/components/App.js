@@ -11,37 +11,22 @@ class disconnectedApp extends React.Component {
         <div className="body-column-container">
           <div className="body-column">
             <SortBox
-              name="bubbleSort"
               displayName="bubble_sort"
-              arrays={this.props.arrays}
+              data={this.props.bubbleSortData}
             />
             <SortBox
-              name="selectionSort"
               displayName="selection_sort"
-              arrays={this.props.arrays}
+              data={this.props.selectionSortData}
             />
             <SortBox
-              name="insertionSort"
               displayName="insertion_sort"
-              arrays={this.props.arrays}
+              data={this.props.insertionSortData}
             />
           </div>
-          <div className="body-column" arrays={this.props.arrays}>
-            <SortBox
-              name="quickSort"
-              displayName="quick_sort"
-              arrays={this.props.arrays}
-            />
-            <SortBox
-              name="mergeSort"
-              displayName="merge_sort"
-              arrays={this.props.arrays}
-            />
-            <SortBox
-              name="heapSort"
-              displayName="heap_sort"
-              arrays={this.props.arrays}
-            />
+          <div className="body-column">
+            <SortBox displayName="quick_sort" data={this.props.quickSortData} />
+            <SortBox displayName="merge_sort" data={this.props.mergeSortData} />
+            <SortBox displayName="heap_sort" data={this.props.heapSortData} />
           </div>
         </div>
       </div>
@@ -51,7 +36,12 @@ class disconnectedApp extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    arrays: state
+    bubbleSortData: state.bubbleSort,
+    selectionSortData: state.selectionSort,
+    insertionSortData: state.insertionSort,
+    mergeSortData: state.mergeSort,
+    heapSortData: state.heapSort,
+    quickSortData: state.quickSort
   };
 };
 
