@@ -6,7 +6,7 @@ class SortBox extends React.Component {
   render() {
     const pointer = this.props.data.pointer;
     const history = this.props.data.history;
-    const array = history[pointer];
+    const array = history[pointer] || history[history.length - 1];
 
     return (
       <div className="sort-container-outer">
