@@ -38023,7 +38023,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43212,6 +43212,67 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./src/algos/bubbleSort.js":
+/*!*********************************!*\
+  !*** ./src/algos/bubbleSort.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/***/ }),
+
+/***/ "./src/algos/shuffledArrayFactory.js":
+/*!*******************************************!*\
+  !*** ./src/algos/shuffledArrayFactory.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/*
+Function for generating a shuffled array object of a given size
+Returned array has shape:
+
+[
+  {value: 0, status: 'unsorted'},
+  {value: 1, status: 'unsorted'},
+  ...
+  {value: n, status: 'unsorted'}
+]
+
+*/
+
+var sortedArrayFactory = function sortedArrayFactory(length) {
+  return Array.from({ length: length }, function (_, i) {
+    return { value: i + 1, status: 'unsorted' };
+  });
+};
+
+var shuffleArray = function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i -= 1) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [array[j], array[i]];
+    array[i] = _ref[0];
+    array[j] = _ref[1];
+  }
+  return array;
+};
+
+var shuffledArrayFactory = function shuffledArrayFactory(size) {
+  return shuffleArray(sortedArrayFactory(size));
+};
+exports.default = shuffledArrayFactory;
+
+/***/ }),
+
 /***/ "./src/components/App.js":
 /*!*******************************!*\
   !*** ./src/components/App.js ***!
@@ -43644,29 +43705,17 @@ var _reduxThunk = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-t
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
+var _bubbleSort = __webpack_require__(/*! ../algos/bubbleSort */ "./src/algos/bubbleSort.js");
+
+var _bubbleSort2 = _interopRequireDefault(_bubbleSort);
+
+var _shuffledArrayFactory = __webpack_require__(/*! ../algos/shuffledArrayFactory */ "./src/algos/shuffledArrayFactory.js");
+
+var _shuffledArrayFactory2 = _interopRequireDefault(_shuffledArrayFactory);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-// utilities
-var sortedArrayFactory = function sortedArrayFactory(length) {
-  return Array.from({ length: length }, function (_, i) {
-    return { value: i + 1, status: 'unsorted' };
-  });
-};
-
-var shuffleArray = function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i -= 1) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var _ref = [array[j], array[i]];
-    array[i] = _ref[0];
-    array[j] = _ref[1];
-  }
-  return array;
-};
-var createNewArray = function createNewArray(size) {
-  return shuffleArray(sortedArrayFactory(size));
-};
 
 // action types
 var RESET_ARRAY = exports.RESET_ARRAY = 'RESET_ARRAY';
@@ -43698,7 +43747,7 @@ var reducer = function reducer() {
   var action = arguments[1];
 
   if (action.type === RESET_ARRAY) {
-    var newArray = createNewArray(action.size);
+    var newArray = (0, _shuffledArrayFactory2.default)(action.size);
     return {
       bubbleSort: [].concat(_toConsumableArray(newArray)),
       selectionSort: [].concat(_toConsumableArray(newArray)),
