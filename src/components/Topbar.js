@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { resetArray, step } from '../redux/store';
+import { resetArray, stepForward, stepBack } from '../redux/store';
 
 class disconnectedTopbar extends React.Component {
   componentDidMount() {
@@ -12,8 +12,11 @@ class disconnectedTopbar extends React.Component {
       <div className="topbar">
         <span className="title">sort_buddy</span>
         <span className="topbar-link-container">
-          <a href="#0" onClick={this.props.step} className="topbar-link">
-            step
+          <a href="#0" onClick={this.props.stepBack} className="topbar-link">
+            back
+          </a>
+          <a href="#0" onClick={this.props.stepForward} className="topbar-link">
+            forward
           </a>
           <a
             href="#0"
@@ -31,7 +34,8 @@ class disconnectedTopbar extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     reset: size => dispatch(resetArray(size)),
-    step: () => dispatch(step())
+    stepForward: () => dispatch(stepForward()),
+    stepBack: () => dispatch(stepBack())
   };
 };
 

@@ -1,3 +1,2 @@
-
 add STEP_BACKWARD reducer
-
+code bubble sort history factory
