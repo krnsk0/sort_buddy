@@ -4,8 +4,8 @@ import FlipMove from 'react-flip-move';
 
 class SortBox extends React.Component {
   render() {
-    const pointer = this.props.data.pointer;
-    const history = this.props.data.history;
+    const pointer = this.props.pointer;
+    const history = this.props.history;
     const array = history[pointer] || history[history.length - 1];
 
     return (
