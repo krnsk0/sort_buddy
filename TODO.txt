@@ -1,2 +1,3 @@
-fix conditional rendering for pointer advancement?
-pad history objects to max length?
+fix rendering to use reworked state shape
+add STEP_BACKWARD
+

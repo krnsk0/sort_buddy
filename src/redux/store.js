@@ -28,50 +28,30 @@ export const step = () => {
 };
 // reducer
 const initialState = {
-  bubbleSort: { history: [], pointer: 0 },
-  selectionSort: { history: [], pointer: 0 },
-  insertionSort: { history: [], pointer: 0 },
-  mergeSort: { history: [], pointer: 0 },
-  heapSort: { history: [], pointer: 0 },
-  quickSort: { history: [], pointer: 0 }
+  pointer: 0,
+  bubbleSort: [],
+  selectionSort: [],
+  insertionSort: [],
+  mergeSort: [],
+  heapSort: [],
+  quickSort: []
 };
 const reducer = (state = initialState, action) => {
   if (action.type === RESET_ARRAY) {
     const shuffledArray = shuffledArrayFactory(action.size);
     return {
-      bubbleSort: { history: bubbleSort(shuffledArray), pointer: 0 },
-      selectionSort: { history: selectionSort(shuffledArray), pointer: 0 },
-      insertionSort: { history: insertionSort(shuffledArray), pointer: 0 },
-      mergeSort: { history: mergeSort(shuffledArray), pointer: 0 },
-      heapSort: { history: heapSort(shuffledArray), pointer: 0 },
-      quickSort: { history: quickSort(shuffledArray), pointer: 0 }
+      pointer: 0,
+      bubbleSort: bubbleSort(shuffledArray),
+      selectionSort: selectionSort(shuffledArray),
+      insertionSort: insertionSort(shuffledArray),
+      mergeSort: mergeSort(shuffledArray),
+      heapSort: heapSort(shuffledArray),
+      quickSort: quickSort(shuffledArray)
     };
   } else if (action.type === STEP) {
     return {
-      bubbleSort: {
-        history: state.bubbleSort.history,
-        pointer: (state.bubbleSort.pointer += 1)
-      },
-      selectionSort: {
-        history: state.selectionSort.history,
-        pointer: (state.selectionSort.pointer += 1)
-      },
-      insertionSort: {
-        history: state.insertionSort.history,
-        pointer: (state.insertionSort.pointer += 1)
-      },
-      mergeSort: {
-        history: state.mergeSort.history,
-        pointer: (state.mergeSort.pointer += 1)
-      },
-      heapSort: {
-        history: state.heapSort.history,
-        pointer: (state.heapSort.pointer += 1)
-      },
-      quickSort: {
-        history: state.quickSort.history,
-        pointer: (state.quickSort.pointer += 1)
-      }
+      ...state,
+      pointer: state.pointer + 1
     };
   } else {
     return state;
