@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import bubbleSort from '../algos/bubbleSort';
 import sortedArrayFactory from '../algos/shuffledArrayFactory';
+import bubbleSort from '../algos/bubbleSort';
 
 // action types
 export const RESET_ARRAY = 'RESET_ARRAY';
