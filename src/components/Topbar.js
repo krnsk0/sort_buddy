@@ -15,6 +15,7 @@ class disconnectedTopbar extends React.Component {
           <a href="#0" onClick={this.props.stepBack} className="topbar-link">
             {'<<'}
           </a>
+          <span className="topbar-text">{this.props.pointer}</span>
           <a href="#0" onClick={this.props.stepForward} className="topbar-link">
             {'>>'}
           </a>
@@ -39,7 +40,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return { pointer: state.pointer };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(disconnectedTopbar);
