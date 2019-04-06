@@ -1,1 +1,0 @@
-correctly calculate maxLength and constrain forward steps

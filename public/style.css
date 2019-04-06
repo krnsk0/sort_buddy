@@ -15,12 +15,12 @@
   justify-content: space-between;
 }
 .title {
-  font-size: 25px;
+  font-size: 22px;
   margin: 5px;
   color: white;
 }
 .topbar-link-container {
-  font-size: 25px;
+  font-size: 22px;
   margin: 5px;
 }
 .topbar-link {
@@ -28,7 +28,7 @@
   color: red;
 }
 .topbar-text {
-  font-size: 25px;
+  font-size: 22px;
   margin: 5px;
   color: white;
 }
@@ -73,4 +73,13 @@
   position: absolute;
   bottom: 0;
   width: 90%;
+}
+.sort-bar.sorted {
+  background-color: firebrick;
+}
+.sort-bar.comparing {
+  background-color: IndianRed;
+}
+.sort-bar.unsorted {
+  background-color: lightgray;
 }

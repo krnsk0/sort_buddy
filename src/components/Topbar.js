@@ -2,9 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { resetArray, stepForward, stepBack } from '../redux/store';
 
+const arraySize = 25;
+
 class disconnectedTopbar extends React.Component {
   componentDidMount() {
-    this.props.reset(10);
+    this.props.reset(arraySize);
+    window.addEventListener('keydown', evt =>
+      this.keyHandler(evt, this.props.stepBack, this.props.stepForward, () =>
+        this.props.reset(arraySize)
+      )
+    );
+  }
+
+  keyHandler(evt, stepBack, stepForward, reset) {
+    if (evt.keyCode === 39) {
+      stepForward();
+    } else if (evt.keyCode === 37) {
+      stepBack();
+    } else if (evt.keyCode === 32) {
+      reset();
+    }
   }
 
   render() {
@@ -23,7 +40,7 @@ class disconnectedTopbar extends React.Component {
           </a>
           <a
             href="#0"
-            onClick={() => this.props.reset(10)}
+            onClick={() => this.props.reset(arraySize)}
             className="topbar-link"
           >
             reset
