@@ -15,17 +15,22 @@
   justify-content: space-between;
 }
 .title {
-  font-size: 20px;
+  font-size: 25px;
   margin: 5px;
   color: white;
 }
 .topbar-link-container {
-  font-size: 20px;
+  font-size: 25px;
   margin: 5px;
 }
 .topbar-link {
-  margin-left: 15px;
+  margin: 15px;
   color: red;
+}
+.topbar-text {
+  font-size: 25px;
+  margin: 5px;
+  color: white;
 }
 
 /* body flexboxes */
@@ -48,6 +53,7 @@
   color: white;
   padding-left: 5px;
   padding-top: 2px;
+  font-size: 20px;
 }
 .sort-container {
   height: 200px;
