@@ -1,3 +1,5 @@
+import { copyData } from './utils';
+
 const quickSort = input => {
   // put a copy of the input in the history array
   const history = [];
