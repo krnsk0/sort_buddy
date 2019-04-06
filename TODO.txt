@@ -1,1 +1,1 @@
-code bubble sort history factory
+correctly calculate maxLength and constrain forward steps
