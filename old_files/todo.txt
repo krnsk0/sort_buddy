@@ -1,5 +1,0 @@
-add vertical flex to boxes
-finish insertion sort
-finish merge sort
-finish quick sort
-finish heap sort
