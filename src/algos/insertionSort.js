@@ -12,16 +12,19 @@ const insertionSort = input => {
     for (let j = i - 1; j >= 0; j -= 1) {
       array[j].status = 'comparing';
       array[j + 1].status = 'comparing';
-      history.push(copyData(array));
 
       // if i is smaller swap
       if (array[j].value > array[j + 1].value) {
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
 
+        history.push(copyData(array));
+
         // turn off display comparison
         array[j].status = 'sorted';
         array[j + 1].status = 'sorted';
       } else {
+        history.push(copyData(array));
+
         // turn off display comparison
         array[j].status = 'sorted';
         array[j + 1].status = 'sorted';
