@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import { copyData } from './utils';
 
 const mergeSort = input => {
@@ -9,18 +10,15 @@ const mergeSort = input => {
   const array = copyData(input);
 
   const merge = (start, middle, end) => {
+    // mark all as unsorted
+    array.forEach(el => (el.status = 'unsorted'));
+
     let i = start;
     let j = middle + 1;
-
-    array[i].status = 'comparing';
-    array[j].status = 'comparing';
 
     while (i <= middle && j <= end) {
       if (array[i].value <= array[j].value) {
         history.push(copyData(array));
-
-        array[i].status = 'unsorted';
-        array[j].status = 'unsorted';
 
         i += 1;
       } else if (array[j].value < array[i].value) {
@@ -32,29 +30,11 @@ const mergeSort = input => {
         j += 1;
         i += 1;
         middle += 1;
-
-        array[i].status = 'unsorted';
-        array[i - 1].status = 'unsorted';
       }
     }
   };
 
   const mergeRecursive = (start, end) => {
-    // start & end inclusive
-    if (end - start === 1) {
-      array[start].status = 'comparing';
-      array[end].status = 'comparing';
-
-      if (array[start].value > array[end].value) {
-        [array[start], array[end]] = [array[end], array[start]];
-
-        history.push(copyData(array));
-
-        array[start].status = 'unsorted';
-        array[end].status = 'unsorted';
-      }
-      return;
-    }
     if (end === start) return;
 
     const middle = Math.floor(start + (end - start) / 2);
