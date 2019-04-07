@@ -10,22 +10,33 @@ const mergeSort = input => {
   const array = copyData(input);
 
   const merge = (start, middle, end) => {
-    // mark all as unsorted
-    array.forEach(el => (el.status = 'unsorted'));
-
     let i = start;
     let j = middle + 1;
 
+    const finalMerge = start === 0 && end === array.length - 1;
+
     while (i <= middle && j <= end) {
       if (array[i].value <= array[j].value) {
+        array[i].status = 'comparing';
+        array[j].status = 'comparing';
+
         history.push(copyData(array));
+
+        array[i].status = finalMerge ? 'sorted' : 'unsorted';
+        array[j].status = 'unsorted';
 
         i += 1;
       } else if (array[j].value < array[i].value) {
+        array[i].status = 'comparing';
+        array[j].status = 'comparing';
+
+        history.push(copyData(array));
+
         const removed = array.splice(j, 1);
         array.splice(i, 0, ...removed);
 
-        history.push(copyData(array));
+        array[i].status = finalMerge ? 'sorted' : 'unsorted';
+        array[i + 1].status = 'unsorted';
 
         j += 1;
         i += 1;
@@ -46,6 +57,8 @@ const mergeSort = input => {
   };
 
   mergeRecursive(0, array.length - 1);
+  array.forEach(el => (el.status = 'sorted'));
+  history.push(copyData(array));
 
   return history;
 };
