@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { resetArray, stepForward, stepBack } from '../redux/store';
 
-const arraySize = 15;
+const arraySize = 16;
 
 class disconnectedTopbar extends React.Component {
   componentDidMount() {
