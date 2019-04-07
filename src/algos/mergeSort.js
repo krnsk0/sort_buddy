@@ -14,7 +14,9 @@ const mergeSort = input => {
     let i = start;
     let j = middle + 1;
 
-    const finalMerge = start === 0 && end === array.length - 1;
+    for (let x = start; x <= end; x += 1) {
+      array[x].status = 'unsorted';
+    }
 
     while (i <= middle && j <= end) {
       if (array[i].value <= array[j].value) {
@@ -23,7 +25,7 @@ const mergeSort = input => {
 
         history.push(copyData(array));
 
-        array[i].status = finalMerge ? 'sorted' : 'unsorted';
+        array[i].status = 'sorted';
         array[j].status = 'unsorted';
 
         i += 1;
@@ -36,7 +38,7 @@ const mergeSort = input => {
         const removed = array.splice(j, 1);
         array.splice(i, 0, ...removed);
 
-        array[i].status = finalMerge ? 'sorted' : 'unsorted';
+        array[i].status = 'sorted';
         array[i + 1].status = 'unsorted';
 
         j += 1;
@@ -44,6 +46,11 @@ const mergeSort = input => {
         middle += 1;
       }
     }
+
+    for (let x = start; x <= end; x += 1) {
+      array[x].status = 'sorted';
+    }
+    history.push(copyData(array));
   };
 
   const mergeRecursive = (start, end) => {
