@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-return-assign */
 import { copyData } from './utils';
 
