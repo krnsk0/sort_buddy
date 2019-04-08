@@ -43742,6 +43742,10 @@ var _SortBox = __webpack_require__(/*! ./SortBox */ "./src/components/SortBox.js
 
 var _SortBox2 = _interopRequireDefault(_SortBox);
 
+var _Popup = __webpack_require__(/*! ./Popup */ "./src/components/Popup.js");
+
+var _Popup2 = _interopRequireDefault(_Popup);
+
 var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -43755,13 +43759,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var disconnectedApp = function (_React$Component) {
   _inherits(disconnectedApp, _React$Component);
 
-  function disconnectedApp() {
+  function disconnectedApp(props) {
     _classCallCheck(this, disconnectedApp);
 
-    return _possibleConstructorReturn(this, (disconnectedApp.__proto__ || Object.getPrototypeOf(disconnectedApp)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (disconnectedApp.__proto__ || Object.getPrototypeOf(disconnectedApp)).call(this, props));
+
+    _this.togglePopup = _this.togglePopup.bind(_this);
+    return _this;
   }
 
   _createClass(disconnectedApp, [{
+    key: 'togglePopup',
+    value: function togglePopup() {
+      console.log('toggling popup');
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -43813,7 +43825,8 @@ var disconnectedApp = function (_React$Component) {
               pointer: this.props.pointer
             })
           )
-        )
+        ),
+        _react2.default.createElement(_Popup2.default, { togglePopup: this.togglePopup })
       );
     }
   }]);
@@ -43834,6 +43847,51 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(disconnectedApp);
+
+/***/ }),
+
+/***/ "./src/components/Popup.js":
+/*!*********************************!*\
+  !*** ./src/components/Popup.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Topbar = function Topbar(props) {
+  return _react2.default.createElement(
+    "div",
+    { className: "popup-outer" },
+    _react2.default.createElement(
+      "div",
+      { className: "popup-inner" },
+      _react2.default.createElement(
+        "span",
+        null,
+        "popup"
+      ),
+      _react2.default.createElement(
+        "button",
+        { type: "button", onClick: props.togglePopup },
+        "close me"
+      )
+    )
+  );
+};
+
+exports.default = Topbar;
 
 /***/ }),
 
@@ -44192,7 +44250,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.stepBack = exports.stepForward = exports.resetArray = exports.STEP_BACK = exports.STEP_FORWARD = exports.RESET_ARRAY = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /* eslint-disable no-return-assign */
+
+// import { applyMiddleware } from 'redux';
+// import { createLogger } from 'redux-logger';
+
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
@@ -44226,11 +44288,7 @@ var _quickSort2 = _interopRequireDefault(_quickSort);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } /* eslint-disable no-return-assign */
-
-// import { applyMiddleware } from 'redux';
-// import { createLogger } from 'redux-logger';
-
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 // action types
 var RESET_ARRAY = exports.RESET_ARRAY = 'RESET_ARRAY';
@@ -44257,6 +44315,7 @@ var stepBack = exports.stepBack = function stepBack() {
 
 // reducer
 var initialState = {
+  popup: true,
   pointer: 0,
   maxLength: 0,
   bubbleSort: [],
@@ -44272,15 +44331,14 @@ var reducer = function reducer() {
 
   if (action.type === RESET_ARRAY) {
     var shuffledArray = (0, _shuffledArrayFactory2.default)(action.size);
-    var newState = {
+    var newState = _extends({}, state, {
       bubbleSort: (0, _bubbleSort2.default)(shuffledArray),
       selectionSort: (0, _selectionSort2.default)(shuffledArray),
       insertionSort: (0, _insertionSort2.default)(shuffledArray),
       mergeSort: (0, _mergeSort2.default)(shuffledArray),
       heapSort: (0, _heapSort2.default)(shuffledArray),
       quickSort: (0, _quickSort2.default)(shuffledArray)
-    };
-    newState.pointer = 0;
+    });
     newState.maxLength = Math.max.apply(Math, _toConsumableArray(Object.values(newState).map(function (arr) {
       return arr.length;
     }).filter(function (n) {

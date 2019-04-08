@@ -1,9 +1,19 @@
 import React from 'react';
 import Topbar from './Topbar';
 import SortBox from './SortBox';
+import Popup from './Popup';
 import { connect } from 'react-redux';
 
 class disconnectedApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.togglePopup = this.togglePopup.bind(this);
+  }
+
+  togglePopup() {
+    console.log('toggling popup');
+  }
+
   render() {
     return (
       <div className="app">
@@ -44,6 +54,7 @@ class disconnectedApp extends React.Component {
             />
           </div>
         </div>
+        <Popup togglePopup={this.togglePopup} />
       </div>
     );
   }

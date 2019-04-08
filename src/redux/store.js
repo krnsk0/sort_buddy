@@ -35,6 +35,7 @@ export const stepBack = () => {
 
 // reducer
 const initialState = {
+  popup: true,
   pointer: 0,
   maxLength: 0,
   bubbleSort: [],
@@ -48,6 +49,7 @@ const reducer = (state = initialState, action) => {
   if (action.type === RESET_ARRAY) {
     const shuffledArray = shuffledArrayFactory(action.size);
     const newState = {
+      ...state,
       bubbleSort: bubbleSort(shuffledArray),
       selectionSort: selectionSort(shuffledArray),
       insertionSort: insertionSort(shuffledArray),
@@ -55,7 +57,6 @@ const reducer = (state = initialState, action) => {
       heapSort: heapSort(shuffledArray),
       quickSort: quickSort(shuffledArray)
     };
-    newState.pointer = 0;
     newState.maxLength = Math.max(
       ...Object.values(newState)
         .map(arr => arr.length)
