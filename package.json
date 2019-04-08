@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-watch": "webpack -w",
     "serve": "http-server -c-1 ./public",
-    "start": "npm run build-watch & npm run serve"
+    "start": "npm run build-watch & npm run serve",
+    "deploy": "git subtree push --prefix public origin gh-pages"
   },
   "keywords": [],
   "author": "",
