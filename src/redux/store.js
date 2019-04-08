@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
-import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+import { createStore } from 'redux';
+// import { applyMiddleware } from 'redux';
+// import { createLogger } from 'redux-logger';
 import shuffledArrayFactory from '../algos/shuffledArrayFactory';
 import bubbleSort from '../algos/bubbleSort';
 import selectionSort from '../algos/selectionSort';
@@ -84,6 +84,6 @@ const reducer = (state = initialState, action) => {
 
 // create store
 export default createStore(
-  reducer,
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  reducer
+  // applyMiddleware(createLogger({ collapsed: true }))
 );

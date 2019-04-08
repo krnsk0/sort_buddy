@@ -6,7 +6,7 @@ const ARRAY_SIZE = 24;
 
 class disconnectedTopbar extends React.Component {
   componentDidMount() {
-    this.props.reset(arraySize);
+    this.props.reset(ARRAY_SIZE);
     window.addEventListener('keydown', evt =>
       this.keyHandler(evt, this.props.stepBack, this.props.stepForward, () =>
         this.props.reset(ARRAY_SIZE)
