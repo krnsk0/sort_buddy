@@ -1,1 +1,3 @@
 is visualization on heapify correct?
+fix #0 at end of URL and default behavior for links
+set up popup

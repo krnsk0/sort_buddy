@@ -11458,7 +11458,7 @@ module.exports = exports['default'];
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *
+ * 
  */
 
 function makeEmptyFunction(arg) {
@@ -28167,7 +28167,7 @@ function insertNonHydratedInstance(returnFiber, fiber) {
               didNotFindHydratableContainerTextInstance(parentContainer, text);
               break;
             case SuspenseComponent:
-
+              
               break;
           }
           break;
@@ -37443,7 +37443,7 @@ __webpack_require__.r(__webpack_exports__);
   selectorFactory, which has the signature:
 
     (dispatch, options) => (nextState, nextOwnProps) => nextFinalProps
-
+  
   connect passes its args to connectAdvanced as options, which will in turn pass them to
   selectorFactory each time a Connect component instance is instantiated or hot reloaded.
 
@@ -38023,7 +38023,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43982,6 +43982,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var DURATION = 100;
+
 var SortBox = function (_React$Component) {
   _inherits(SortBox, _React$Component);
 
@@ -44011,7 +44013,7 @@ var SortBox = function (_React$Component) {
           { className: 'sort-container' },
           history.length && _react2.default.createElement(
             _reactFlipMove2.default,
-            { typeName: null, duration: 100, enterAnimation: 'none' },
+            { typeName: null, duration: DURATION, enterAnimation: 'none' },
             array.map(function (el) {
               return _react2.default.createElement(_SortBar2.default, {
                 key: el.value,
@@ -44065,7 +44067,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var arraySize = 24;
+var ARRAY_SIZE = 24;
 
 var disconnectedTopbar = function (_React$Component) {
   _inherits(disconnectedTopbar, _React$Component);
@@ -44084,7 +44086,7 @@ var disconnectedTopbar = function (_React$Component) {
       this.props.reset(arraySize);
       window.addEventListener('keydown', function (evt) {
         return _this2.keyHandler(evt, _this2.props.stepBack, _this2.props.stepForward, function () {
-          return _this2.props.reset(arraySize);
+          return _this2.props.reset(ARRAY_SIZE);
         });
       });
     }
@@ -44137,7 +44139,7 @@ var disconnectedTopbar = function (_React$Component) {
             {
               href: '#0',
               onClick: function onClick() {
-                return _this3.props.reset(arraySize);
+                return _this3.props.reset(ARRAY_SIZE);
               },
               className: 'topbar-link'
             },
