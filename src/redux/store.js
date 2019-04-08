@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 import { createStore } from 'redux';
-// import { applyMiddleware } from 'redux';
-// import { createLogger } from 'redux-logger';
+import { applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
 import shuffledArrayFactory from '../algos/shuffledArrayFactory';
 import bubbleSort from '../algos/bubbleSort';
 import selectionSort from '../algos/selectionSort';
@@ -14,6 +14,7 @@ import quickSort from '../algos/quickSort';
 export const RESET_ARRAY = 'RESET_ARRAY';
 export const STEP_FORWARD = 'STEP_FORWARD';
 export const STEP_BACK = 'STEP_BACK';
+export const TOGGLE_POPUP = 'TOGGLE_POPUP';
 
 // action creators
 export const resetArray = size => {
@@ -32,7 +33,11 @@ export const stepBack = () => {
     type: STEP_BACK
   };
 };
-
+export const togglePopup = () => {
+  return {
+    type: TOGGLE_POPUP
+  };
+};
 // reducer
 const initialState = {
   popup: true,
@@ -78,6 +83,11 @@ const reducer = (state = initialState, action) => {
       ...state,
       pointer: state.pointer - 1 >= 0 ? state.pointer - 1 : 0
     };
+  } else if (action.type === TOGGLE_POPUP) {
+    return {
+      ...state,
+      popup: !state.popup
+    };
   } else {
     return state;
   }
@@ -85,6 +95,6 @@ const reducer = (state = initialState, action) => {
 
 // create store
 export default createStore(
-  reducer
-  // applyMiddleware(createLogger({ collapsed: true }))
+  reducer,
+  applyMiddleware(createLogger({ collapsed: true }))
 );

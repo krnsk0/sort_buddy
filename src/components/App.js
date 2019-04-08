@@ -3,15 +3,11 @@ import Topbar from './Topbar';
 import SortBox from './SortBox';
 import Popup from './Popup';
 import { connect } from 'react-redux';
+import { togglePopup } from '../redux/store';
 
 class disconnectedApp extends React.Component {
   constructor(props) {
     super(props);
-    this.togglePopup = this.togglePopup.bind(this);
-  }
-
-  togglePopup() {
-    console.log('toggling popup');
   }
 
   render() {
@@ -54,7 +50,7 @@ class disconnectedApp extends React.Component {
             />
           </div>
         </div>
-        <Popup togglePopup={this.togglePopup} />
+        {this.props.popup && <Popup togglePopup={this.props.togglePopup} />}
       </div>
     );
   }
@@ -68,11 +64,18 @@ const mapStateToProps = state => {
     insertionSortData: state.insertionSort,
     mergeSortData: state.mergeSort,
     heapSortData: state.heapSort,
-    quickSortData: state.quickSort
+    quickSortData: state.quickSort,
+    popup: state.popup
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    togglePopup: () => dispatch(togglePopup())
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(disconnectedApp);
