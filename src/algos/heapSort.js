@@ -15,6 +15,17 @@ const heapSort = input => {
       let leftChild = 2 * i + 1;
       let rightChild = 2 * i + 2;
 
+      // display style 1
+      // if (leftChild < max) array[leftChild].status = 'comparing';
+      // if (rightChild < max) array[rightChild].status = 'comparing';
+      // if (leftChild < max || rightChild < max) {
+      //   array[index].status = 'comparing';
+      //   history.push(copyData(array));
+      //   array[index].status = 'unsorted';
+      // }
+      // if (leftChild < max) array[leftChild].status = 'unsorted';
+      // if (rightChild < max) array[rightChild].status = 'unsorted';
+
       if (leftChild < max) {
         if (array[leftChild].value > array[index].value) {
           index = leftChild;
@@ -30,13 +41,14 @@ const heapSort = input => {
         return;
       }
 
+      // display style 2
       array[i].status = 'comparing';
       array[index].status = 'comparing';
 
       [array[i], array[index]] = [array[index], array[i]];
 
+      // display style 1
       history.push(copyData(array));
-
       array[i].status = 'unsorted';
       array[index].status = 'unsorted';
 
