@@ -21,7 +21,14 @@ class disconnectedTopbar extends React.Component {
   }
 
   togglePlay() {
-    this.setState({ playing: !this.state.playing });
+    let intervalHandle;
+    if (this.state.playing === false) {
+      intervalHandle = window.setInterval(() => this.props.stepForward(), 100);
+      this.setState({ playing: intervalHandle });
+    } else {
+      window.clearInterval(this.state.playing);
+      this.setState({ playing: false });
+    }
   }
 
   keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
