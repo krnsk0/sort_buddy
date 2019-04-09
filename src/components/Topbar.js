@@ -21,7 +21,7 @@ class disconnectedTopbar extends React.Component {
   }
 
   togglePlay() {
-    console.log('playing');
+    this.setState({ playing: !this.state.playing });
   }
 
   keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
@@ -69,7 +69,7 @@ class disconnectedTopbar extends React.Component {
             onClick={this.togglePlay}
             className="topbar-button"
           >
-            {'play'}
+            {this.state.playing ? 'pause' : 'play '}
           </button>
           <form
             onSubmit={evt => {
