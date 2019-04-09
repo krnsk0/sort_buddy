@@ -6,7 +6,7 @@ import { resetArray, stepForward, stepBack } from '../redux/store';
 class disconnectedTopbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { size: 16, playing: false };
+    this.state = { size: 8, playing: false };
     this.onSizeChange = this.onSizeChange.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
   }
