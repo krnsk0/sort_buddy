@@ -44163,6 +44163,41 @@ var disconnectedTopbar = function (_React$Component) {
           'span',
           { className: 'topbar-link-container' },
           _react2.default.createElement(
+            'select',
+            { id: 'size-selector' },
+            _react2.default.createElement(
+              'option',
+              { value: '8' },
+              '8'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '16' },
+              '16'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '32' },
+              '32'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: '64' },
+              '64'
+            )
+          ),
+          _react2.default.createElement(
+            'a',
+            {
+              href: null,
+              onClick: function onClick() {
+                return _this3.props.reset(ARRAY_SIZE);
+              },
+              className: 'topbar-link'
+            },
+            'reset'
+          ),
+          _react2.default.createElement(
             'a',
             { href: null, onClick: this.props.stepBack, className: 'topbar-link' },
             '<<'
@@ -44182,17 +44217,6 @@ var disconnectedTopbar = function (_React$Component) {
               className: 'topbar-link'
             },
             '>>'
-          ),
-          _react2.default.createElement(
-            'a',
-            {
-              href: null,
-              onClick: function onClick() {
-                return _this3.props.reset(ARRAY_SIZE);
-              },
-              className: 'topbar-link'
-            },
-            'reset'
           )
         )
       );
