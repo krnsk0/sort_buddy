@@ -44216,7 +44216,7 @@ var disconnectedTopbar = function (_React$Component) {
               onClick: this.togglePlay,
               className: 'topbar-button'
             },
-            this.state.playing ? 'pause' : 'play '
+            this.state.playing ? 'pause' : 'play'
           ),
           _react2.default.createElement(
             'form',

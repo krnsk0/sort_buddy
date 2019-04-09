@@ -69,7 +69,7 @@ class disconnectedTopbar extends React.Component {
             onClick={this.togglePlay}
             className="topbar-button"
           >
-            {this.state.playing ? 'pause' : 'play '}
+            {this.state.playing ? 'pause' : 'play'}
           </button>
           <form
             onSubmit={evt => {
