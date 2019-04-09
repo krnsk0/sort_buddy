@@ -29,6 +29,20 @@ class disconnectedTopbar extends React.Component {
       <div className="topbar">
         <span className="title">sort_buddy</span>
         <span className="topbar-link-container">
+          <select id="size-selector">
+            <option value="8">8</option>
+            <option value="16">16</option>
+            <option value="32">32</option>
+            <option value="64">64</option>
+          </select>
+
+          <a
+            href={null}
+            onClick={() => this.props.reset(ARRAY_SIZE)}
+            className="topbar-link"
+          >
+            reset
+          </a>
           <a href={null} onClick={this.props.stepBack} className="topbar-link">
             {'<<'}
           </a>
@@ -41,13 +55,6 @@ class disconnectedTopbar extends React.Component {
             className="topbar-link"
           >
             {'>>'}
-          </a>
-          <a
-            href={null}
-            onClick={() => this.props.reset(ARRAY_SIZE)}
-            className="topbar-link"
-          >
-            reset
           </a>
         </span>
       </div>

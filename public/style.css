@@ -26,6 +26,7 @@
 .topbar-link {
   margin: 15px;
   color: red;
+  text-decoration: underline;
 }
 .topbar-text {
   font-size: 22px;
