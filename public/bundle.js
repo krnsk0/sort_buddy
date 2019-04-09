@@ -43277,6 +43277,22 @@ var heapSort = function heapSort(input) {
       var rightChild = 2 * i + 2;
 
       // display style 1
+      if (leftChild < max) {
+        array[leftChild].status = 'comparing';
+        array[index].status = 'comparing';
+        history.push((0, _utils.copyData)(array));
+        array[index].status = 'unsorted';
+        array[leftChild].status = 'unsorted';
+      }
+      if (rightChild < max) {
+        array[rightChild].status = 'comparing';
+        array[index].status = 'comparing';
+        history.push((0, _utils.copyData)(array));
+        array[index].status = 'unsorted';
+        array[rightChild].status = 'unsorted';
+      }
+
+      // display style 2
       // if (leftChild < max) array[leftChild].status = 'comparing';
       // if (rightChild < max) array[rightChild].status = 'comparing';
       // if (leftChild < max || rightChild < max) {
@@ -43302,18 +43318,18 @@ var heapSort = function heapSort(input) {
         return;
       }
 
-      // display style 2
-      array[i].status = 'comparing';
-      array[index].status = 'comparing';
+      // display style 3
+      // array[i].status = 'comparing';
+      // array[index].status = 'comparing';
 
-      // display style 1
+      // display style 3
+      // history.push(copyData(array));
+      // array[i].status = 'unsorted';
+      // array[index].status = 'unsorted';
+
       var _ref = [array[index], array[i]];
       array[i] = _ref[0];
       array[index] = _ref[1];
-      history.push((0, _utils.copyData)(array));
-      array[i].status = 'unsorted';
-      array[index].status = 'unsorted';
-
       i = index;
     }
   };
@@ -44366,7 +44382,6 @@ var reducer = function reducer() {
     }).filter(function (n) {
       return typeof n === 'number';
     })).concat([0]));
-    console.log(newState);
     return newState;
   } else if (action.type === STEP_FORWARD) {
     return _extends({}, state, {

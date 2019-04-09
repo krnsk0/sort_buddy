@@ -1,3 +1,5 @@
-is visualization on heapify correct?
+change heapify default display
 fix #0 at end of URL and default behavior for links
 set webpack to production mode in deploy script
+add reset selector
+play button

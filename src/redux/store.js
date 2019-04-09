@@ -70,7 +70,6 @@ const reducer = (state = initialState, action) => {
         .filter(n => typeof n === 'number'),
       0
     );
-    console.log(newState);
     return newState;
   } else if (action.type === STEP_FORWARD) {
     return {
