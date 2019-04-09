@@ -9,40 +9,70 @@ class disconnectedTopbar extends React.Component {
     this.state = { size: 16, playing: false };
     this.onSizeChange = this.onSizeChange.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+    this.onReset = this.onReset.bind(this);
+    this.play = this.play.bind(this);
+    this.pause = this.pause.bind(this);
+    this.stepForwardWrapper = this.stepForwardWrapper.bind(this);
+    this.stepBackWrapper = this.stepBackWrapper.bind(this);
   }
 
   componentDidMount() {
     this.props.reset(this.state.size);
     window.addEventListener('keydown', evt =>
-      this.keyHandler(evt, this.props.stepBack, this.props.stepForward, () =>
-        this.props.reset(this.state.size)
-      )
+      this.keyHandler(evt, this.props.stepBack, this.props.stepForward)
     );
   }
 
   togglePlay() {
-    let intervalHandle;
     if (this.state.playing === false) {
-      intervalHandle = window.setInterval(() => this.props.stepForward(), 100);
-      this.setState({ playing: intervalHandle });
+      this.play();
     } else {
-      window.clearInterval(this.state.playing);
-      this.setState({ playing: false });
+      this.pause();
     }
   }
 
-  keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
+  play() {
+    let intervalHandle = window.setInterval(
+      () => this.stepForwardWrapper(),
+      100
+    );
+    this.setState({ playing: intervalHandle });
+  }
+
+  pause() {
+    window.clearInterval(this.state.playing);
+    this.setState({ playing: false });
+  }
+
+  stepForwardWrapper() {
+    this.props.stepForward();
+  }
+
+  stepBackWrapper() {
+    this.props.stepBack();
+  }
+
+  keyHandler(evt) {
     if (evt.keyCode === 39) {
-      stepForwardFunc();
+      this.pause();
+      this.stepForwardWrapper();
     } else if (evt.keyCode === 37) {
-      stepBackFunc();
+      this.pause();
+      this.stepBackWrapper();
     } else if (evt.keyCode === 32) {
-      resetFunc();
+      evt.preventDefault();
+      this.togglePlay();
     }
   }
 
   onSizeChange(evt) {
     this.setState({ size: evt.target.value });
+  }
+
+  onReset(evt) {
+    evt.preventDefault();
+    this.pause();
+    this.props.reset(this.state.size);
   }
 
   render() {
@@ -54,7 +84,10 @@ class disconnectedTopbar extends React.Component {
         <span className="topbar-container">
           <button
             type="button"
-            onClick={this.props.stepBack}
+            onClick={() => {
+              this.pause();
+              this.props.stepBackWrapper();
+            }}
             className="topbar-button"
           >
             {'<<'}
@@ -64,7 +97,10 @@ class disconnectedTopbar extends React.Component {
           </span>
           <button
             type="button"
-            onClick={this.props.stepForward}
+            onClick={() => {
+              this.pause();
+              this.props.stepForwardWrapper();
+            }}
             className="topbar-button"
           >
             {'>>'}
@@ -78,13 +114,7 @@ class disconnectedTopbar extends React.Component {
           >
             {this.state.playing ? 'pause' : 'play'}
           </button>
-          <form
-            onSubmit={evt => {
-              evt.preventDefault();
-              this.props.reset(this.state.size);
-            }}
-            id="size-form"
-          >
+          <form onSubmit={this.onReset} id="size-form">
             <button type="submit" className="topbar-button">
               reset
             </button>

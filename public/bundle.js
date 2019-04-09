@@ -44124,6 +44124,11 @@ var disconnectedTopbar = function (_React$Component) {
     _this.state = { size: 16, playing: false };
     _this.onSizeChange = _this.onSizeChange.bind(_this);
     _this.togglePlay = _this.togglePlay.bind(_this);
+    _this.onReset = _this.onReset.bind(_this);
+    _this.play = _this.play.bind(_this);
+    _this.pause = _this.pause.bind(_this);
+    _this.stepForwardWrapper = _this.stepForwardWrapper.bind(_this);
+    _this.stepBackWrapper = _this.stepBackWrapper.bind(_this);
     return _this;
   }
 
@@ -44134,42 +44139,69 @@ var disconnectedTopbar = function (_React$Component) {
 
       this.props.reset(this.state.size);
       window.addEventListener('keydown', function (evt) {
-        return _this2.keyHandler(evt, _this2.props.stepBack, _this2.props.stepForward, function () {
-          return _this2.props.reset(_this2.state.size);
-        });
+        return _this2.keyHandler(evt, _this2.props.stepBack, _this2.props.stepForward);
       });
     }
   }, {
     key: 'togglePlay',
     value: function togglePlay() {
-      var _this3 = this;
-
-      var intervalHandle = void 0;
       if (this.state.playing === false) {
-        intervalHandle = window.setInterval(function () {
-          return _this3.props.stepForward();
-        }, 100);
-        this.setState({ playing: intervalHandle });
+        this.play();
       } else {
-        window.clearInterval(this.state.playing);
-        this.setState({ playing: false });
+        this.pause();
       }
     }
   }, {
+    key: 'play',
+    value: function play() {
+      var _this3 = this;
+
+      var intervalHandle = window.setInterval(function () {
+        return _this3.stepForwardWrapper();
+      }, 100);
+      this.setState({ playing: intervalHandle });
+    }
+  }, {
+    key: 'pause',
+    value: function pause() {
+      window.clearInterval(this.state.playing);
+      this.setState({ playing: false });
+    }
+  }, {
+    key: 'stepForwardWrapper',
+    value: function stepForwardWrapper() {
+      this.props.stepForward();
+    }
+  }, {
+    key: 'stepBackWrapper',
+    value: function stepBackWrapper() {
+      this.props.stepBack();
+    }
+  }, {
     key: 'keyHandler',
-    value: function keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
+    value: function keyHandler(evt) {
       if (evt.keyCode === 39) {
-        stepForwardFunc();
+        this.pause();
+        this.stepForwardWrapper();
       } else if (evt.keyCode === 37) {
-        stepBackFunc();
+        this.pause();
+        this.stepBackWrapper();
       } else if (evt.keyCode === 32) {
-        resetFunc();
+        evt.preventDefault();
+        this.togglePlay();
       }
     }
   }, {
     key: 'onSizeChange',
     value: function onSizeChange(evt) {
       this.setState({ size: evt.target.value });
+    }
+  }, {
+    key: 'onReset',
+    value: function onReset(evt) {
+      evt.preventDefault();
+      this.pause();
+      this.props.reset(this.state.size);
     }
   }, {
     key: 'render',
@@ -44195,7 +44227,10 @@ var disconnectedTopbar = function (_React$Component) {
             'button',
             {
               type: 'button',
-              onClick: this.props.stepBack,
+              onClick: function onClick() {
+                _this4.pause();
+                _this4.props.stepBackWrapper();
+              },
               className: 'topbar-button'
             },
             '<<'
@@ -44211,7 +44246,10 @@ var disconnectedTopbar = function (_React$Component) {
             'button',
             {
               type: 'button',
-              onClick: this.props.stepForward,
+              onClick: function onClick() {
+                _this4.pause();
+                _this4.props.stepForwardWrapper();
+              },
               className: 'topbar-button'
             },
             '>>'
@@ -44231,13 +44269,7 @@ var disconnectedTopbar = function (_React$Component) {
           ),
           _react2.default.createElement(
             'form',
-            {
-              onSubmit: function onSubmit(evt) {
-                evt.preventDefault();
-                _this4.props.reset(_this4.state.size);
-              },
-              id: 'size-form'
-            },
+            { onSubmit: this.onReset, id: 'size-form' },
             _react2.default.createElement(
               'button',
               { type: 'submit', className: 'topbar-button' },
