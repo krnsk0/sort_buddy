@@ -44137,13 +44137,13 @@ var disconnectedTopbar = function (_React$Component) {
     }
   }, {
     key: 'keyHandler',
-    value: function keyHandler(evt, stepBack, stepForward, reset) {
+    value: function keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
       if (evt.keyCode === 39) {
-        stepForward();
+        stepForwardFunc();
       } else if (evt.keyCode === 37) {
-        stepBack();
+        stepBackFunc();
       } else if (evt.keyCode === 32) {
-        reset();
+        resetFunc();
       }
     }
   }, {
@@ -44164,7 +44164,7 @@ var disconnectedTopbar = function (_React$Component) {
           { className: 'topbar-link-container' },
           _react2.default.createElement(
             'a',
-            { href: '#0', onClick: this.props.stepBack, className: 'topbar-link' },
+            { href: null, onClick: this.props.stepBack, className: 'topbar-link' },
             '<<'
           ),
           _react2.default.createElement(
@@ -44176,13 +44176,17 @@ var disconnectedTopbar = function (_React$Component) {
           ),
           _react2.default.createElement(
             'a',
-            { href: '#0', onClick: this.props.stepForward, className: 'topbar-link' },
+            {
+              href: null,
+              onClick: this.props.stepForward,
+              className: 'topbar-link'
+            },
             '>>'
           ),
           _react2.default.createElement(
             'a',
             {
-              href: '#0',
+              href: null,
               onClick: function onClick() {
                 return _this3.props.reset(ARRAY_SIZE);
               },

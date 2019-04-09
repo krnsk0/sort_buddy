@@ -14,13 +14,13 @@ class disconnectedTopbar extends React.Component {
     );
   }
 
-  keyHandler(evt, stepBack, stepForward, reset) {
+  keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
     if (evt.keyCode === 39) {
-      stepForward();
+      stepForwardFunc();
     } else if (evt.keyCode === 37) {
-      stepBack();
+      stepBackFunc();
     } else if (evt.keyCode === 32) {
-      reset();
+      resetFunc();
     }
   }
 
@@ -29,17 +29,21 @@ class disconnectedTopbar extends React.Component {
       <div className="topbar">
         <span className="title">sort_buddy</span>
         <span className="topbar-link-container">
-          <a href="#0" onClick={this.props.stepBack} className="topbar-link">
+          <a href={null} onClick={this.props.stepBack} className="topbar-link">
             {'<<'}
           </a>
           <span className="topbar-text">
             {this.props.pointer} / {this.props.maxLength}
           </span>
-          <a href="#0" onClick={this.props.stepForward} className="topbar-link">
+          <a
+            href={null}
+            onClick={this.props.stepForward}
+            className="topbar-link"
+          >
             {'>>'}
           </a>
           <a
-            href="#0"
+            href={null}
             onClick={() => this.props.reset(ARRAY_SIZE)}
             className="topbar-link"
           >
