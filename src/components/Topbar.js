@@ -85,6 +85,7 @@ class disconnectedTopbar extends React.Component {
               id="size-selector"
               className="size-selector"
               onChange={this.onSizeChange}
+              value={this.state.size}
             >
               <option value="8">8</option>
               <option value="16">16</option>
