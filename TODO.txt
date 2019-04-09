@@ -1,6 +1,3 @@
-
-fix #0 at end of URL and default behavior for links
-set webpack to production mode in deploy script
 add reset selector
 play button
 add display for progress for each sort

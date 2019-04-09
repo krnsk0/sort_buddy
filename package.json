@@ -4,10 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-watch": "webpack -w",
+    "build-watch": "webpack --mode=development -w",
     "serve": "http-server -c-1 ./public",
-    "start": "npm run build-watch & npm run serve",
-    "deploy": "git subtree push --prefix public origin gh-pages"
+    "start-dev": "npm run build-watch & npm run serve",
+    "build-deploy": "webpack --mode=production",
+    "github-pages-deploy": "git subtree push --prefix public origin gh-pages",
+    "deploy": "npm run build-deploy && npm run github-pages-deploy"
   },
   "keywords": [],
   "author": "",
