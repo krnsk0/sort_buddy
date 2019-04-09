@@ -2,14 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { resetArray, stepForward, stepBack } from '../redux/store';
 
-const ARRAY_SIZE = 24;
-
 class disconnectedTopbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { size: 16 };
+    this.onSizeChange = this.onSizeChange.bind(this);
+  }
+
   componentDidMount() {
-    this.props.reset(ARRAY_SIZE);
+    this.props.reset(this.state.size);
     window.addEventListener('keydown', evt =>
       this.keyHandler(evt, this.props.stepBack, this.props.stepForward, () =>
-        this.props.reset(ARRAY_SIZE)
+        this.props.reset(this.state.size)
       )
     );
   }
@@ -24,38 +28,59 @@ class disconnectedTopbar extends React.Component {
     }
   }
 
+  onSizeChange(evt) {
+    this.setState({ size: evt.target.value });
+  }
+
   render() {
     return (
       <div className="topbar">
-        <span className="title">sort_buddy</span>
-        <span className="topbar-link-container">
-          <select id="size-selector">
-            <option value="8">8</option>
-            <option value="16">16</option>
-            <option value="32">32</option>
-            <option value="64">64</option>
-          </select>
-
-          <a
-            href={null}
-            onClick={() => this.props.reset(ARRAY_SIZE)}
-            className="topbar-link"
+        <span className="topbar-container">
+          <span className="title">sort_buddy</span>
+        </span>
+        <span className="topbar-container">
+          <button
+            type="button"
+            onClick={this.props.stepBack}
+            className="topbar-button"
           >
-            reset
-          </a>
-          <a href={null} onClick={this.props.stepBack} className="topbar-link">
             {'<<'}
-          </a>
+          </button>
           <span className="topbar-text">
             {this.props.pointer} / {this.props.maxLength}
           </span>
-          <a
-            href={null}
+          <button
+            type="button"
             onClick={this.props.stepForward}
-            className="topbar-link"
+            className="topbar-button"
           >
             {'>>'}
-          </a>
+          </button>
+        </span>
+        <span className="topbar-container">
+          <form
+            onSubmit={evt => {
+              evt.preventDefault();
+              this.props.reset(this.state.size);
+            }}
+            id="size-form"
+          >
+            <button type="submit" className="topbar-button">
+              reset
+            </button>
+            <select
+              id="size-selector"
+              className="size-selector"
+              onChange={this.onSizeChange}
+            >
+              <option value="8">8</option>
+              <option selected value="16">
+                16
+              </option>
+              <option value="32">32</option>
+              <option value="64">64</option>
+            </select>
+          </form>
         </span>
       </div>
     );

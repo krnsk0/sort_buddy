@@ -41,7 +41,7 @@ export const togglePopup = () => {
 };
 // reducer
 const initialState = {
-  popup: true,
+  popup: false,
   pointer: 0,
   maxLength: 0,
   bubbleSort: [],
