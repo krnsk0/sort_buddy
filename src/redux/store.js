@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-imports */
 /* eslint-disable no-return-assign */
 import { createStore } from 'redux';
 import { applyMiddleware } from 'redux';
@@ -55,6 +56,7 @@ const reducer = (state = initialState, action) => {
     const shuffledArray = shuffledArrayFactory(action.size);
     const newState = {
       ...state,
+      pointer: 0,
       bubbleSort: bubbleSort(shuffledArray),
       selectionSort: selectionSort(shuffledArray),
       insertionSort: insertionSort(shuffledArray),
@@ -68,7 +70,7 @@ const reducer = (state = initialState, action) => {
         .filter(n => typeof n === 'number'),
       0
     );
-
+    console.log(newState);
     return newState;
   } else if (action.type === STEP_FORWARD) {
     return {
