@@ -38,7 +38,7 @@
 .size-selector {
   font-size: 14px;
   color: black;
-  margin: 4px;
+  margin: 4px 4px 6px;
   border: 1px solid black;
   border-radius: 0px;
 }

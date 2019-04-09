@@ -44120,8 +44120,9 @@ var disconnectedTopbar = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (disconnectedTopbar.__proto__ || Object.getPrototypeOf(disconnectedTopbar)).call(this, props));
 
-    _this.state = { size: 16 };
+    _this.state = { size: 16, playing: false };
     _this.onSizeChange = _this.onSizeChange.bind(_this);
+    _this.togglePlay = _this.togglePlay.bind(_this);
     return _this;
   }
 
@@ -44137,6 +44138,9 @@ var disconnectedTopbar = function (_React$Component) {
         });
       });
     }
+  }, {
+    key: 'togglePlay',
+    value: function togglePlay() {}
   }, {
     key: 'keyHandler',
     value: function keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
@@ -44202,6 +44206,11 @@ var disconnectedTopbar = function (_React$Component) {
         _react2.default.createElement(
           'span',
           { className: 'topbar-container' },
+          _react2.default.createElement(
+            'button',
+            { type: 'button', onClick: null, className: 'topbar-button' },
+            'play'
+          ),
           _react2.default.createElement(
             'form',
             {

@@ -5,8 +5,9 @@ import { resetArray, stepForward, stepBack } from '../redux/store';
 class disconnectedTopbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { size: 16 };
+    this.state = { size: 16, playing: false };
     this.onSizeChange = this.onSizeChange.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
   }
 
   componentDidMount() {
@@ -17,6 +18,8 @@ class disconnectedTopbar extends React.Component {
       )
     );
   }
+
+  togglePlay() {}
 
   keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
     if (evt.keyCode === 39) {
@@ -58,6 +61,9 @@ class disconnectedTopbar extends React.Component {
           </button>
         </span>
         <span className="topbar-container">
+          <button type="button" onClick={null} className="topbar-button">
+            {'play'}
+          </button>
           <form
             onSubmit={evt => {
               evt.preventDefault();
