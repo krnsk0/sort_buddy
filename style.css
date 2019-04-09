@@ -23,15 +23,27 @@
   font-size: 22px;
   margin: 5px;
 }
-.topbar-link {
-  margin: 15px;
+.topbar-button {
   color: red;
   text-decoration: underline;
+  background-color: black;
+  font-size: 22px;
+  border: none;
 }
 .topbar-text {
   font-size: 22px;
   margin: 5px;
   color: white;
+}
+.size-selector {
+  font-size: 14px;
+  color: black;
+  margin: 4px;
+  border: 1px solid black;
+  border-radius: 0px;
+}
+#size-form {
+  display: inline;
 }
 
 /* body flexboxes */
