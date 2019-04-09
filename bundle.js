@@ -44266,7 +44266,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.togglePopup = exports.stepBack = exports.stepForward = exports.resetArray = exports.TOGGLE_POPUP = exports.STEP_BACK = exports.STEP_FORWARD = exports.RESET_ARRAY = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /* eslint-disable no-return-assign */
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /* eslint-disable no-duplicate-imports */
+/* eslint-disable no-return-assign */
 
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
@@ -44352,6 +44353,7 @@ var reducer = function reducer() {
   if (action.type === RESET_ARRAY) {
     var shuffledArray = (0, _shuffledArrayFactory2.default)(action.size);
     var newState = _extends({}, state, {
+      pointer: 0,
       bubbleSort: (0, _bubbleSort2.default)(shuffledArray),
       selectionSort: (0, _selectionSort2.default)(shuffledArray),
       insertionSort: (0, _insertionSort2.default)(shuffledArray),
@@ -44364,7 +44366,7 @@ var reducer = function reducer() {
     }).filter(function (n) {
       return typeof n === 'number';
     })).concat([0]));
-
+    console.log(newState);
     return newState;
   } else if (action.type === STEP_FORWARD) {
     return _extends({}, state, {
