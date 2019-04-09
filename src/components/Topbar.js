@@ -1,3 +1,4 @@
+/* eslint-disable function-paren-newline */
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetArray, stepForward, stepBack } from '../redux/store';
@@ -19,7 +20,9 @@ class disconnectedTopbar extends React.Component {
     );
   }
 
-  togglePlay() {}
+  togglePlay() {
+    console.log('playing');
+  }
 
   keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
     if (evt.keyCode === 39) {
@@ -61,7 +64,11 @@ class disconnectedTopbar extends React.Component {
           </button>
         </span>
         <span className="topbar-container">
-          <button type="button" onClick={null} className="topbar-button">
+          <button
+            type="button"
+            onClick={this.togglePlay}
+            className="topbar-button"
+          >
             {'play'}
           </button>
           <form

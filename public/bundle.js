@@ -44110,7 +44110,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable function-paren-newline */
+
 
 var disconnectedTopbar = function (_React$Component) {
   _inherits(disconnectedTopbar, _React$Component);
@@ -44140,7 +44141,9 @@ var disconnectedTopbar = function (_React$Component) {
     }
   }, {
     key: 'togglePlay',
-    value: function togglePlay() {}
+    value: function togglePlay() {
+      console.log('playing');
+    }
   }, {
     key: 'keyHandler',
     value: function keyHandler(evt, stepBackFunc, stepForwardFunc, resetFunc) {
@@ -44208,7 +44211,11 @@ var disconnectedTopbar = function (_React$Component) {
           { className: 'topbar-container' },
           _react2.default.createElement(
             'button',
-            { type: 'button', onClick: null, className: 'topbar-button' },
+            {
+              type: 'button',
+              onClick: this.togglePlay,
+              className: 'topbar-button'
+            },
             'play'
           ),
           _react2.default.createElement(
