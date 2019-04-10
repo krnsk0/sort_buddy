@@ -1,73 +1,52 @@
 /* eslint-disable function-paren-newline */
 import React from 'react';
 import { connect } from 'react-redux';
-import { resetArray, stepForward, stepBack } from '../redux/store';
+import {
+  resetArray,
+  stepForward,
+  stepBack,
+  togglePlaying,
+  selectMaxLength
+} from '../redux/store';
 
 class disconnectedTopbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { size: 16, playing: false };
-    this.onSizeChange = this.onSizeChange.bind(this);
-    this.togglePlay = this.togglePlay.bind(this);
-    this.onReset = this.onReset.bind(this);
-    this.play = this.play.bind(this);
-    this.pause = this.pause.bind(this);
-    this.stepForwardWrapper = this.stepForwardWrapper.bind(this);
-    this.stepBackWrapper = this.stepBackWrapper.bind(this);
+    this.state = { size: props.size };
   }
 
   componentDidMount() {
-    this.props.reset(this.state.size);
-    window.addEventListener('keydown', evt =>
-      this.keyHandler(evt, this.props.stepBack, this.props.stepForward)
-    );
+    window.addEventListener('keydown', this.keyHandler);
   }
 
-  togglePlay() {
-    if (this.state.playing === false) {
-      this.play();
-    } else {
-      this.pause();
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.keyHandler);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { playing } = this.props;
+    if (playing && !prevProps.playing) {
+      this.interval = setInterval(this.props.stepForward, 100);
+    } else if (!playing && prevProps.playing) {
+      clearInterval(this.interval);
     }
   }
 
-  play() {
-    let intervalHandle = window.setInterval(
-      () => this.stepForwardWrapper(),
-      100
-    );
-    this.setState({ playing: intervalHandle });
-  }
+  keyHandler = evt => {
+    const { stepBack, stepForward, reset } = this.props;
 
-  pause() {
-    window.clearInterval(this.state.playing);
-    this.setState({ playing: false });
-  }
-
-  stepForwardWrapper() {
-    this.props.stepForward();
-  }
-
-  stepBackWrapper() {
-    this.props.stepBack();
-  }
-
-  keyHandler(evt) {
     if (evt.keyCode === 39) {
-      this.pause();
-      this.stepForwardWrapper();
+      stepForward();
     } else if (evt.keyCode === 37) {
-      this.pause();
-      this.stepBackWrapper();
+      stepBack();
     } else if (evt.keyCode === 32) {
-      evt.preventDefault();
-      this.togglePlay();
+      reset(this.state.size);
     }
-  }
+  };
 
-  onSizeChange(evt) {
+  onSizeChange = evt => {
     this.setState({ size: evt.target.value });
-  }
+  };
 
   onReset(evt) {
     evt.preventDefault();
@@ -82,37 +61,41 @@ class disconnectedTopbar extends React.Component {
           <span className="title">sort_buddy</span>
         </span>
         <span className="topbar-container">
-          <button
-            type="button"
-            onClick={() => {
-              this.pause();
-              this.props.stepBackWrapper();
-            }}
-            className="topbar-button"
-          >
-            {'<<'}
-          </button>
+          {!this.props.playing && this.props.pointer > 0 && (
+            <button
+              type="button"
+              onClick={() => {
+                this.pause();
+                this.props.stepBackWrapper();
+              }}
+              className="topbar-button"
+            >
+              {'<<'}
+            </button>
+          )}
           <span className="topbar-text">
             {this.props.pointer} / {this.props.maxLength}
           </span>
-          <button
-            type="button"
-            onClick={() => {
-              this.pause();
-              this.props.stepForwardWrapper();
-            }}
-            className="topbar-button"
-          >
-            {'>>'}
-          </button>
+          {!this.props.playing && this.props.pointer < this.props.maxLength && (
+            <button
+              type="button"
+              onClick={() => {
+                this.pause();
+                this.props.stepForwardWrapper();
+              }}
+              className="topbar-button"
+            >
+              {'>>'}
+            </button>
+          )}
         </span>
         <span className="topbar-container">
           <button
             type="button"
-            onClick={this.togglePlay}
+            onClick={this.props.togglePlaying}
             className="topbar-button"
           >
-            {this.state.playing ? 'pause' : 'play'}
+            {this.props.playing ? 'pause' : 'play'}
           </button>
           <form onSubmit={this.onReset} id="size-form">
             <button type="submit" className="topbar-button">
@@ -136,18 +119,19 @@ class disconnectedTopbar extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    reset: size => dispatch(resetArray(size)),
-    stepForward: () => dispatch(stepForward()),
-    stepBack: () => dispatch(stepBack())
-  };
+const mapDispatchToProps = {
+  reset: resetArray,
+  stepForward,
+  stepBack,
+  togglePlaying
 };
 
 const mapStateToProps = state => {
   return {
+    playing: state.playing,
     pointer: state.pointer,
-    maxLength: state.maxLength
+    maxLength: selectMaxLength(state),
+    size: state.size
   };
 };
 

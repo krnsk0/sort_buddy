@@ -43757,8 +43757,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -43781,102 +43779,55 @@ var _store = __webpack_require__(/*! ../redux/store */ "./src/redux/store.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var disconnectedApp = function (_React$Component) {
-  _inherits(disconnectedApp, _React$Component);
-
-  function disconnectedApp(props) {
-    _classCallCheck(this, disconnectedApp);
-
-    return _possibleConstructorReturn(this, (disconnectedApp.__proto__ || Object.getPrototypeOf(disconnectedApp)).call(this, props));
-  }
-
-  _createClass(disconnectedApp, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
+var disconnectedApp = function disconnectedApp(_ref) {
+  var pointer = _ref.pointer,
+      popup = _ref.popup,
+      sorts = _ref.sorts;
+  return _react2.default.createElement(
+    'div',
+    { className: 'app' },
+    _react2.default.createElement(_Topbar2.default, null),
+    _react2.default.createElement(
+      'div',
+      { className: 'body-column-container' },
+      _react2.default.createElement(
         'div',
-        { className: 'app' },
-        _react2.default.createElement(_Topbar2.default, { reset: function reset() {
-            return _this2.props.reset(10);
-          } }),
-        _react2.default.createElement(
-          'div',
-          { className: 'body-column-container' },
-          _react2.default.createElement(
-            'div',
-            { className: 'body-column' },
-            _react2.default.createElement(_SortBox2.default, {
-              displayName: 'bubble_sort',
-              history: this.props.bubbleSortData,
-              pointer: this.props.pointer
-            }),
-            _react2.default.createElement(_SortBox2.default, {
-              displayName: 'selection_sort',
-              history: this.props.selectionSortData,
-              pointer: this.props.pointer
-            }),
-            _react2.default.createElement(_SortBox2.default, {
-              displayName: 'insertion_sort',
-              history: this.props.insertionSortData,
-              pointer: this.props.pointer
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'body-column' },
-            _react2.default.createElement(_SortBox2.default, {
-              displayName: 'quick_sort',
-              history: this.props.quickSortData,
-              pointer: this.props.pointer
-            }),
-            _react2.default.createElement(_SortBox2.default, {
-              displayName: 'merge_sort',
-              history: this.props.mergeSortData,
-              pointer: this.props.pointer
-            }),
-            _react2.default.createElement(_SortBox2.default, {
-              displayName: 'heap_sort',
-              history: this.props.heapSortData,
-              pointer: this.props.pointer
-            })
-          )
-        ),
-        this.props.popup && _react2.default.createElement(_Popup2.default, { togglePopup: this.props.togglePopup })
-      );
-    }
-  }]);
-
-  return disconnectedApp;
-}(_react2.default.Component);
+        { className: 'body-column' },
+        ['bubble', 'selection', 'insertion'].map(function (sort) {
+          return _react2.default.createElement(_SortBox2.default, {
+            key: sort,
+            displayName: sort + '_sort',
+            history: sorts[sort],
+            pointer: pointer
+          });
+        })
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'body-column' },
+        ['quick', 'merge', 'heap'].map(function (sort) {
+          return _react2.default.createElement(_SortBox2.default, {
+            key: sort,
+            displayName: sort + '_sort',
+            history: sorts[sort],
+            pointer: pointer
+          });
+        })
+      )
+    ),
+    popup && _react2.default.createElement(_Popup2.default, { togglePopup: _store.togglePopup })
+  );
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
     pointer: state.pointer,
-    bubbleSortData: state.bubbleSort,
-    selectionSortData: state.selectionSort,
-    insertionSortData: state.insertionSort,
-    mergeSortData: state.mergeSort,
-    heapSortData: state.heapSort,
-    quickSortData: state.quickSort,
-    popup: state.popup
+    popup: state.popup,
+    sorts: (0, _store.selectSorts)(state)
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    togglePopup: function togglePopup() {
-      return dispatch((0, _store.togglePopup)());
-    }
-  };
-};
+var mapDispatchToProps = { togglePopup: _store.togglePopup };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(disconnectedApp);
 
@@ -44005,8 +43956,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -44021,60 +43970,41 @@ var _reactFlipMove2 = _interopRequireDefault(_reactFlipMove);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var DURATION = 100;
 
-var SortBox = function (_React$Component) {
-  _inherits(SortBox, _React$Component);
+var SortBox = function SortBox(_ref) {
+  var displayName = _ref.displayName,
+      pointer = _ref.pointer,
+      history = _ref.history;
 
-  function SortBox() {
-    _classCallCheck(this, SortBox);
+  var array = history[pointer] || history[history.length - 1];
 
-    return _possibleConstructorReturn(this, (SortBox.__proto__ || Object.getPrototypeOf(SortBox)).apply(this, arguments));
-  }
-
-  _createClass(SortBox, [{
-    key: 'render',
-    value: function render() {
-      var pointer = this.props.pointer;
-      var history = this.props.history;
-      var array = history[pointer] || history[history.length - 1];
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'sort-container-outer' },
-        _react2.default.createElement(
-          'div',
-          { className: 'sort-container-label' },
-          this.props.displayName
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'sort-container' },
-          history.length && _react2.default.createElement(
-            _reactFlipMove2.default,
-            { typeName: null, duration: DURATION, enterAnimation: 'none' },
-            array.map(function (el) {
-              return _react2.default.createElement(_SortBar2.default, {
-                key: el.value,
-                value: el.value,
-                status: el.status,
-                arrayLength: array.length
-              });
-            })
-          )
-        )
-      );
-    }
-  }]);
-
-  return SortBox;
-}(_react2.default.Component);
+  return _react2.default.createElement(
+    'div',
+    { className: 'sort-container-outer' },
+    _react2.default.createElement(
+      'div',
+      { className: 'sort-container-label' },
+      displayName
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'sort-container' },
+      history.length && _react2.default.createElement(
+        _reactFlipMove2.default,
+        { typeName: null, duration: DURATION, enterAnimation: 'none' },
+        array.map(function (el) {
+          return _react2.default.createElement(_SortBar2.default, {
+            key: el.value,
+            value: el.value,
+            status: el.status,
+            arrayLength: array.length
+          });
+        })
+      )
+    )
+  );
+};
 
 exports.default = SortBox;
 
@@ -44121,80 +44051,50 @@ var disconnectedTopbar = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (disconnectedTopbar.__proto__ || Object.getPrototypeOf(disconnectedTopbar)).call(this, props));
 
-    _this.state = { size: 16, playing: false };
-    _this.onSizeChange = _this.onSizeChange.bind(_this);
-    _this.togglePlay = _this.togglePlay.bind(_this);
-    _this.onReset = _this.onReset.bind(_this);
-    _this.play = _this.play.bind(_this);
-    _this.pause = _this.pause.bind(_this);
-    _this.stepForwardWrapper = _this.stepForwardWrapper.bind(_this);
-    _this.stepBackWrapper = _this.stepBackWrapper.bind(_this);
+    _this.keyHandler = function (evt) {
+      var _this$props = _this.props,
+          stepBack = _this$props.stepBack,
+          stepForward = _this$props.stepForward,
+          reset = _this$props.reset;
+
+
+      if (evt.keyCode === 39) {
+        stepForward();
+      } else if (evt.keyCode === 37) {
+        stepBack();
+      } else if (evt.keyCode === 32) {
+        reset(_this.state.size);
+      }
+    };
+
+    _this.onSizeChange = function (evt) {
+      _this.setState({ size: evt.target.value });
+    };
+
+    _this.state = { size: props.size };
     return _this;
   }
 
   _createClass(disconnectedTopbar, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
+      window.addEventListener('keydown', this.keyHandler);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.removeEventListener('keydown', this.keyHandler);
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var playing = this.props.playing;
 
-      this.props.reset(this.state.size);
-      window.addEventListener('keydown', function (evt) {
-        return _this2.keyHandler(evt, _this2.props.stepBack, _this2.props.stepForward);
-      });
-    }
-  }, {
-    key: 'togglePlay',
-    value: function togglePlay() {
-      if (this.state.playing === false) {
-        this.play();
-      } else {
-        this.pause();
+      if (playing && !prevProps.playing) {
+        this.interval = setInterval(this.props.stepForward, 100);
+      } else if (!playing && prevProps.playing) {
+        clearInterval(this.interval);
       }
-    }
-  }, {
-    key: 'play',
-    value: function play() {
-      var _this3 = this;
-
-      var intervalHandle = window.setInterval(function () {
-        return _this3.stepForwardWrapper();
-      }, 100);
-      this.setState({ playing: intervalHandle });
-    }
-  }, {
-    key: 'pause',
-    value: function pause() {
-      window.clearInterval(this.state.playing);
-      this.setState({ playing: false });
-    }
-  }, {
-    key: 'stepForwardWrapper',
-    value: function stepForwardWrapper() {
-      this.props.stepForward();
-    }
-  }, {
-    key: 'stepBackWrapper',
-    value: function stepBackWrapper() {
-      this.props.stepBack();
-    }
-  }, {
-    key: 'keyHandler',
-    value: function keyHandler(evt) {
-      if (evt.keyCode === 39) {
-        this.pause();
-        this.stepForwardWrapper();
-      } else if (evt.keyCode === 37) {
-        this.pause();
-        this.stepBackWrapper();
-      } else if (evt.keyCode === 32) {
-        evt.preventDefault();
-        this.togglePlay();
-      }
-    }
-  }, {
-    key: 'onSizeChange',
-    value: function onSizeChange(evt) {
-      this.setState({ size: evt.target.value });
     }
   }, {
     key: 'onReset',
@@ -44206,7 +44106,7 @@ var disconnectedTopbar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this2 = this;
 
       return _react2.default.createElement(
         'div',
@@ -44223,13 +44123,13 @@ var disconnectedTopbar = function (_React$Component) {
         _react2.default.createElement(
           'span',
           { className: 'topbar-container' },
-          _react2.default.createElement(
+          !this.props.playing && this.props.pointer > 0 && _react2.default.createElement(
             'button',
             {
               type: 'button',
               onClick: function onClick() {
-                _this4.pause();
-                _this4.props.stepBackWrapper();
+                _this2.pause();
+                _this2.props.stepBackWrapper();
               },
               className: 'topbar-button'
             },
@@ -44242,13 +44142,13 @@ var disconnectedTopbar = function (_React$Component) {
             ' / ',
             this.props.maxLength
           ),
-          _react2.default.createElement(
+          !this.props.playing && this.props.pointer < this.props.maxLength && _react2.default.createElement(
             'button',
             {
               type: 'button',
               onClick: function onClick() {
-                _this4.pause();
-                _this4.props.stepForwardWrapper();
+                _this2.pause();
+                _this2.props.stepForwardWrapper();
               },
               className: 'topbar-button'
             },
@@ -44262,10 +44162,10 @@ var disconnectedTopbar = function (_React$Component) {
             'button',
             {
               type: 'button',
-              onClick: this.togglePlay,
+              onClick: this.props.togglePlaying,
               className: 'topbar-button'
             },
-            this.state.playing ? 'pause' : 'play'
+            this.props.playing ? 'pause' : 'play'
           ),
           _react2.default.createElement(
             'form',
@@ -44313,24 +44213,19 @@ var disconnectedTopbar = function (_React$Component) {
   return disconnectedTopbar;
 }(_react2.default.Component);
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    reset: function reset(size) {
-      return dispatch((0, _store.resetArray)(size));
-    },
-    stepForward: function stepForward() {
-      return dispatch((0, _store.stepForward)());
-    },
-    stepBack: function stepBack() {
-      return dispatch((0, _store.stepBack)());
-    }
-  };
+var mapDispatchToProps = {
+  reset: _store.resetArray,
+  stepForward: _store.stepForward,
+  stepBack: _store.stepBack,
+  togglePlaying: _store.togglePlaying
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    playing: state.playing,
     pointer: state.pointer,
-    maxLength: state.maxLength
+    maxLength: (0, _store.selectMaxLength)(state),
+    size: state.size
   };
 };
 
@@ -44395,7 +44290,7 @@ _reactDom2.default.render(_react2.default.createElement(
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.togglePopup = exports.stepBack = exports.stepForward = exports.resetArray = exports.TOGGLE_POPUP = exports.STEP_BACK = exports.STEP_FORWARD = exports.RESET_ARRAY = undefined;
+exports.selectMaxLength = exports.selectSorts = exports.togglePlaying = exports.togglePopup = exports.stepBack = exports.stepForward = exports.resetArray = exports.TOGGLE_PLAYING = exports.TOGGLE_POPUP = exports.STEP_BACK = exports.STEP_FORWARD = exports.RESET_ARRAY = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /* eslint-disable no-duplicate-imports */
 /* eslint-disable no-return-assign */
@@ -44435,13 +44330,12 @@ var _quickSort2 = _interopRequireDefault(_quickSort);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 // action types
 var RESET_ARRAY = exports.RESET_ARRAY = 'RESET_ARRAY';
 var STEP_FORWARD = exports.STEP_FORWARD = 'STEP_FORWARD';
 var STEP_BACK = exports.STEP_BACK = 'STEP_BACK';
 var TOGGLE_POPUP = exports.TOGGLE_POPUP = 'TOGGLE_POPUP';
+var TOGGLE_PLAYING = exports.TOGGLE_PLAYING = 'TOGGLE_PLAYING';
 
 // action creators
 var resetArray = exports.resetArray = function resetArray(size) {
@@ -44465,50 +44359,72 @@ var togglePopup = exports.togglePopup = function togglePopup() {
     type: TOGGLE_POPUP
   };
 };
-// reducer
-var initialState = {
-  popup: false,
-  pointer: 0,
-  maxLength: 0,
-  bubbleSort: [],
-  selectionSort: [],
-  insertionSort: [],
-  mergeSort: [],
-  heapSort: [],
-  quickSort: []
+var togglePlaying = exports.togglePlaying = function togglePlaying() {
+  return { type: TOGGLE_PLAYING };
 };
+
+var INITIAL_SIZE = 32;
+
+var buildInitialState = function buildInitialState() {
+  var unsortedArray = (0, _shuffledArrayFactory2.default)(INITIAL_SIZE);
+  return {
+    playing: false,
+    popup: false,
+    pointer: 0,
+    sorts: buildSortState(unsortedArray),
+    size: INITIAL_SIZE
+  };
+};
+
+var buildSortState = function buildSortState(unsortedArray) {
+  return {
+    bubble: (0, _bubbleSort2.default)(unsortedArray),
+    selection: (0, _selectionSort2.default)(unsortedArray),
+    insertion: (0, _insertionSort2.default)(unsortedArray),
+    merge: (0, _mergeSort2.default)(unsortedArray),
+    heap: (0, _heapSort2.default)(unsortedArray),
+    quick: (0, _quickSort2.default)(unsortedArray)
+  };
+};
+
+var selectSorts = exports.selectSorts = function selectSorts(state) {
+  return state.sorts;
+};
+var selectMaxLength = exports.selectMaxLength = function selectMaxLength(state) {
+  return Object.values(selectSorts(state)).map(function (sort) {
+    return sort.length;
+  }).sort().reverse()[0];
+};
+
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : buildInitialState();
   var action = arguments[1];
 
   if (action.type === RESET_ARRAY) {
-    var shuffledArray = (0, _shuffledArrayFactory2.default)(action.size);
-    var newState = _extends({}, state, {
+    var size = action.size;
+
+    var unsortedArray = (0, _shuffledArrayFactory2.default)(size);
+    return _extends({}, state, {
       pointer: 0,
-      bubbleSort: (0, _bubbleSort2.default)(shuffledArray),
-      selectionSort: (0, _selectionSort2.default)(shuffledArray),
-      insertionSort: (0, _insertionSort2.default)(shuffledArray),
-      mergeSort: (0, _mergeSort2.default)(shuffledArray),
-      heapSort: (0, _heapSort2.default)(shuffledArray),
-      quickSort: (0, _quickSort2.default)(shuffledArray)
+      playing: false,
+      size: size,
+      sorts: buildSortState(unsortedArray)
     });
-    newState.maxLength = Math.max.apply(Math, _toConsumableArray(Object.values(newState).map(function (arr) {
-      return arr.length;
-    }).filter(function (n) {
-      return typeof n === 'number';
-    })).concat([0]));
-    return newState;
   } else if (action.type === STEP_FORWARD) {
     return _extends({}, state, {
-      pointer: state.pointer + 1 >= state.maxLength ? state.maxLength : state.pointer + 1
+      pointer: Math.min(state.pointer + 1, selectMaxLength(state))
     });
   } else if (action.type === STEP_BACK) {
     return _extends({}, state, {
-      pointer: state.pointer - 1 >= 0 ? state.pointer - 1 : 0
+      pointer: Math.max(state.pointer - 1, 0)
     });
   } else if (action.type === TOGGLE_POPUP) {
     return _extends({}, state, {
       popup: !state.popup
+    });
+  } else if (action.type === TOGGLE_PLAYING) {
+    return _extends({}, state, {
+      playing: !state.playing
     });
   } else {
     return state;

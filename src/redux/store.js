@@ -16,6 +16,7 @@ export const RESET_ARRAY = 'RESET_ARRAY';
 export const STEP_FORWARD = 'STEP_FORWARD';
 export const STEP_BACK = 'STEP_BACK';
 export const TOGGLE_POPUP = 'TOGGLE_POPUP';
+export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';
 
 // action creators
 export const resetArray = size => {
@@ -39,55 +40,67 @@ export const togglePopup = () => {
     type: TOGGLE_POPUP
   };
 };
-// reducer
-const initialState = {
-  popup: false,
-  pointer: 0,
-  maxLength: 0,
-  bubbleSort: [],
-  selectionSort: [],
-  insertionSort: [],
-  mergeSort: [],
-  heapSort: [],
-  quickSort: []
+export const togglePlaying = () => ({ type: TOGGLE_PLAYING });
+
+const INITIAL_SIZE = 32;
+
+const buildInitialState = () => {
+  const unsortedArray = shuffledArrayFactory(INITIAL_SIZE);
+  return {
+    playing: false,
+    popup: false,
+    pointer: 0,
+    sorts: buildSortState(unsortedArray),
+    size: INITIAL_SIZE
+  };
 };
-const reducer = (state = initialState, action) => {
+
+const buildSortState = unsortedArray => ({
+  bubble: bubbleSort(unsortedArray),
+  selection: selectionSort(unsortedArray),
+  insertion: insertionSort(unsortedArray),
+  merge: mergeSort(unsortedArray),
+  heap: heapSort(unsortedArray),
+  quick: quickSort(unsortedArray)
+});
+
+export const selectSorts = state => state.sorts;
+export const selectMaxLength = state =>
+  Object.values(selectSorts(state))
+    .map(sort => sort.length)
+    .sort()
+    .reverse()[0];
+
+const reducer = (state = buildInitialState(), action) => {
   if (action.type === RESET_ARRAY) {
-    const shuffledArray = shuffledArrayFactory(action.size);
-    const newState = {
+    const { size } = action;
+    const unsortedArray = shuffledArrayFactory(size);
+    return {
       ...state,
       pointer: 0,
-      bubbleSort: bubbleSort(shuffledArray),
-      selectionSort: selectionSort(shuffledArray),
-      insertionSort: insertionSort(shuffledArray),
-      mergeSort: mergeSort(shuffledArray),
-      heapSort: heapSort(shuffledArray),
-      quickSort: quickSort(shuffledArray)
+      playing: false,
+      size,
+      sorts: buildSortState(unsortedArray)
     };
-    newState.maxLength = Math.max(
-      ...Object.values(newState)
-        .map(arr => arr.length)
-        .filter(n => typeof n === 'number'),
-      0
-    );
-    return newState;
   } else if (action.type === STEP_FORWARD) {
     return {
       ...state,
-      pointer:
-        state.pointer + 1 >= state.maxLength
-          ? state.maxLength
-          : state.pointer + 1
+      pointer: Math.min(state.pointer + 1, selectMaxLength(state))
     };
   } else if (action.type === STEP_BACK) {
     return {
       ...state,
-      pointer: state.pointer - 1 >= 0 ? state.pointer - 1 : 0
+      pointer: Math.max(state.pointer - 1, 0)
     };
   } else if (action.type === TOGGLE_POPUP) {
     return {
       ...state,
       popup: !state.popup
+    };
+  } else if (action.type === TOGGLE_PLAYING) {
+    return {
+      ...state,
+      playing: !state.playing
     };
   } else {
     return state;
