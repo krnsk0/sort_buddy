@@ -42,7 +42,7 @@ export const togglePopup = () => {
 };
 export const togglePlaying = () => ({ type: TOGGLE_PLAYING });
 
-const INITIAL_SIZE = 32;
+const INITIAL_SIZE = 16;
 
 const buildInitialState = () => {
   const unsortedArray = shuffledArrayFactory(INITIAL_SIZE);

@@ -33,14 +33,14 @@ class disconnectedTopbar extends React.Component {
   }
 
   keyHandler = evt => {
-    const { stepBack, stepForward, reset } = this.props;
+    const { stepBack, stepForward } = this.props;
 
     if (evt.keyCode === 39) {
       stepForward();
     } else if (evt.keyCode === 37) {
       stepBack();
     } else if (evt.keyCode === 32) {
-      reset(this.state.size);
+      this.props.togglePlaying();
     }
   };
 

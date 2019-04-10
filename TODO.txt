@@ -1,4 +1,6 @@
-play button
+change spacebar behavior
+check play button behavior
+grey out unusable play buttons rather than conditoinally render
 add display for progress for each sort
 add display for swaps for each sort
 add display for comparisons for each sort
