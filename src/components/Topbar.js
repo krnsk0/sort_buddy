@@ -33,14 +33,16 @@ class disconnectedTopbar extends React.Component {
   }
 
   keyHandler = evt => {
-    const { stepBack, stepForward } = this.props;
+    const { stepBack, stepForward, togglePlaying } = this.props;
 
     if (evt.keyCode === 39) {
+      if (this.props.playing) togglePlaying();
       stepForward();
     } else if (evt.keyCode === 37) {
+      if (this.props.playing) togglePlaying();
       stepBack();
     } else if (evt.keyCode === 32) {
-      this.props.togglePlaying();
+      togglePlaying();
     }
   };
 
@@ -50,7 +52,7 @@ class disconnectedTopbar extends React.Component {
 
   onReset(evt) {
     evt.preventDefault();
-    this.pause();
+    if (this.props.playing) togglePlaying();
     this.props.reset(this.state.size);
   }
 
@@ -64,10 +66,7 @@ class disconnectedTopbar extends React.Component {
           {!this.props.playing && this.props.pointer > 0 && (
             <button
               type="button"
-              onClick={() => {
-                this.pause();
-                this.props.stepBackWrapper();
-              }}
+              onClick={this.props.stepBack}
               className="topbar-button"
             >
               {'<<'}
@@ -79,10 +78,7 @@ class disconnectedTopbar extends React.Component {
           {!this.props.playing && this.props.pointer < this.props.maxLength && (
             <button
               type="button"
-              onClick={() => {
-                this.pause();
-                this.props.stepForwardWrapper();
-              }}
+              onClick={this.props.stepForward}
               className="topbar-button"
             >
               {'>>'}
