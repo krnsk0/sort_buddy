@@ -44054,8 +44054,7 @@ var disconnectedTopbar = function (_React$Component) {
     _this.keyHandler = function (evt) {
       var _this$props = _this.props,
           stepBack = _this$props.stepBack,
-          stepForward = _this$props.stepForward,
-          reset = _this$props.reset;
+          stepForward = _this$props.stepForward;
 
 
       if (evt.keyCode === 39) {
@@ -44063,7 +44062,7 @@ var disconnectedTopbar = function (_React$Component) {
       } else if (evt.keyCode === 37) {
         stepBack();
       } else if (evt.keyCode === 32) {
-        reset(_this.state.size);
+        _this.props.togglePlaying();
       }
     };
 
@@ -44363,7 +44362,7 @@ var togglePlaying = exports.togglePlaying = function togglePlaying() {
   return { type: TOGGLE_PLAYING };
 };
 
-var INITIAL_SIZE = 32;
+var INITIAL_SIZE = 16;
 
 var buildInitialState = function buildInitialState() {
   var unsortedArray = (0, _shuffledArrayFactory2.default)(INITIAL_SIZE);
