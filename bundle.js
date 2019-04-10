@@ -44054,15 +44054,18 @@ var disconnectedTopbar = function (_React$Component) {
     _this.keyHandler = function (evt) {
       var _this$props = _this.props,
           stepBack = _this$props.stepBack,
-          stepForward = _this$props.stepForward;
+          stepForward = _this$props.stepForward,
+          togglePlaying = _this$props.togglePlaying;
 
 
       if (evt.keyCode === 39) {
+        if (_this.props.playing) togglePlaying();
         stepForward();
       } else if (evt.keyCode === 37) {
+        if (_this.props.playing) togglePlaying();
         stepBack();
       } else if (evt.keyCode === 32) {
-        _this.props.togglePlaying();
+        togglePlaying();
       }
     };
 
@@ -44099,14 +44102,12 @@ var disconnectedTopbar = function (_React$Component) {
     key: 'onReset',
     value: function onReset(evt) {
       evt.preventDefault();
-      this.pause();
+      if (this.props.playing) (0, _store.togglePlaying)();
       this.props.reset(this.state.size);
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       return _react2.default.createElement(
         'div',
         { className: 'topbar' },
@@ -44126,10 +44127,7 @@ var disconnectedTopbar = function (_React$Component) {
             'button',
             {
               type: 'button',
-              onClick: function onClick() {
-                _this2.pause();
-                _this2.props.stepBackWrapper();
-              },
+              onClick: this.props.stepBack,
               className: 'topbar-button'
             },
             '<<'
@@ -44145,10 +44143,7 @@ var disconnectedTopbar = function (_React$Component) {
             'button',
             {
               type: 'button',
-              onClick: function onClick() {
-                _this2.pause();
-                _this2.props.stepForwardWrapper();
-              },
+              onClick: this.props.stepForward,
               className: 'topbar-button'
             },
             '>>'
