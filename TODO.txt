@@ -1,6 +1,6 @@
-bug -- not enough steps
 grey out unusable play buttons rather than conditoinally render
 add hover stuff for links
+highlight boxes when sort is complete
 add display for progress for each sort
 add display for swaps for each sort
 add display for comparisons for each sort

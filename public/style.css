@@ -29,6 +29,7 @@
   background-color: black;
   font-size: 22px;
   border: none;
+  cursor: pointer;
 }
 .topbar-text {
   font-size: 22px;
