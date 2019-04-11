@@ -68,7 +68,7 @@ export const selectSorts = state => state.sorts;
 export const selectMaxLength = state =>
   Object.values(selectSorts(state))
     .map(sort => sort.length)
-    .sort()
+    .sort((a, b) => a - b)
     .reverse()[0];
 
 const reducer = (state = buildInitialState(), action) => {
