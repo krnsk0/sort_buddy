@@ -33,6 +33,7 @@
 }
 .topbar-button.inactive {
   color: grey;
+  cursor: auto;
 }
 .topbar-text {
   font-size: 22px;
