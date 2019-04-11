@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable function-paren-newline */
 import React from 'react';
 import { connect } from 'react-redux';
@@ -77,12 +78,12 @@ class disconnectedTopbar extends React.Component {
         <span className="topbar-container">
           <button
             type="button"
-            onClick={evt => {
+            onClick={() => {
               // stops playing if playing
               if (this.props.playing) this.props.togglePlaying();
               this.props.stepBack();
             }}
-            className="topbar-button"
+            className={`topbar-button ${this.props.pointer <= 0 && 'inactive'}`}
           >
             {'<<'}
           </button>
@@ -92,12 +93,13 @@ class disconnectedTopbar extends React.Component {
           </span>
           <button
             type="button"
-            onClick={evt => {
+            onClick={() => {
               // stops playing if playing
               if (this.props.playing) this.props.togglePlaying();
               this.props.stepForward();
             }}
-            className="topbar-button"
+            className={`topbar-button ${this.props.pointer >=
+              this.props.maxLength && 'inactive'}`}
           >
             {'>>'}
           </button>

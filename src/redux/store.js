@@ -11,6 +11,9 @@ import mergeSort from '../algos/mergeSort';
 import heapSort from '../algos/heapSort';
 import quickSort from '../algos/quickSort';
 
+// constants
+const INITIAL_SIZE = 16;
+
 // action types
 export const RESET_ARRAY = 'RESET_ARRAY';
 export const STEP_FORWARD = 'STEP_FORWARD';
@@ -42,8 +45,23 @@ export const togglePopup = () => {
 };
 export const togglePlaying = () => ({ type: TOGGLE_PLAYING });
 
-const INITIAL_SIZE = 16;
+// selectors
+export const selectSorts = state => state.sorts;
+export const selectMaxLength = state =>
+  Object.values(selectSorts(state))
+    .map(sort => sort.length)
+    .sort((a, b) => a - b)
+    .reverse()[0];
 
+// state initialization
+const buildSortState = unsortedArray => ({
+  bubble: bubbleSort(unsortedArray),
+  selection: selectionSort(unsortedArray),
+  insertion: insertionSort(unsortedArray),
+  merge: mergeSort(unsortedArray),
+  heap: heapSort(unsortedArray),
+  quick: quickSort(unsortedArray)
+});
 const buildInitialState = () => {
   const unsortedArray = shuffledArrayFactory(INITIAL_SIZE);
   return {
@@ -54,22 +72,6 @@ const buildInitialState = () => {
     size: INITIAL_SIZE
   };
 };
-
-const buildSortState = unsortedArray => ({
-  bubble: bubbleSort(unsortedArray),
-  selection: selectionSort(unsortedArray),
-  insertion: insertionSort(unsortedArray),
-  merge: mergeSort(unsortedArray),
-  heap: heapSort(unsortedArray),
-  quick: quickSort(unsortedArray)
-});
-
-export const selectSorts = state => state.sorts;
-export const selectMaxLength = state =>
-  Object.values(selectSorts(state))
-    .map(sort => sort.length)
-    .sort((a, b) => a - b)
-    .reverse()[0];
 
 const reducer = (state = buildInitialState(), action) => {
   if (action.type === RESET_ARRAY) {
