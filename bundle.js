@@ -44040,7 +44040,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable function-paren-newline */
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable no-shadow */
+/* eslint-disable function-paren-newline */
 
 
 var disconnectedTopbar = function (_React$Component) {
@@ -44149,12 +44150,12 @@ var disconnectedTopbar = function (_React$Component) {
             'button',
             {
               type: 'button',
-              onClick: function onClick(evt) {
+              onClick: function onClick() {
                 // stops playing if playing
                 if (_this2.props.playing) _this2.props.togglePlaying();
                 _this2.props.stepBack();
               },
-              className: 'topbar-button'
+              className: 'topbar-button ' + (this.props.pointer <= 0 && 'inactive')
             },
             '<<'
           ),
@@ -44169,12 +44170,12 @@ var disconnectedTopbar = function (_React$Component) {
             'button',
             {
               type: 'button',
-              onClick: function onClick(evt) {
+              onClick: function onClick() {
                 // stops playing if playing
                 if (_this2.props.playing) _this2.props.togglePlaying();
                 _this2.props.stepForward();
               },
-              className: 'topbar-button'
+              className: 'topbar-button ' + (this.props.pointer >= this.props.maxLength && 'inactive')
             },
             '>>'
           )
@@ -44361,6 +44362,9 @@ var _quickSort2 = _interopRequireDefault(_quickSort);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// constants
+var INITIAL_SIZE = 16;
+
 // action types
 var RESET_ARRAY = exports.RESET_ARRAY = 'RESET_ARRAY';
 var STEP_FORWARD = exports.STEP_FORWARD = 'STEP_FORWARD';
@@ -44394,19 +44398,19 @@ var togglePlaying = exports.togglePlaying = function togglePlaying() {
   return { type: TOGGLE_PLAYING };
 };
 
-var INITIAL_SIZE = 16;
-
-var buildInitialState = function buildInitialState() {
-  var unsortedArray = (0, _shuffledArrayFactory2.default)(INITIAL_SIZE);
-  return {
-    playing: false,
-    popup: false,
-    pointer: 0,
-    sorts: buildSortState(unsortedArray),
-    size: INITIAL_SIZE
-  };
+// selectors
+var selectSorts = exports.selectSorts = function selectSorts(state) {
+  return state.sorts;
+};
+var selectMaxLength = exports.selectMaxLength = function selectMaxLength(state) {
+  return Object.values(selectSorts(state)).map(function (sort) {
+    return sort.length;
+  }).sort(function (a, b) {
+    return a - b;
+  }).reverse()[0];
 };
 
+// state initialization
 var buildSortState = function buildSortState(unsortedArray) {
   return {
     bubble: (0, _bubbleSort2.default)(unsortedArray),
@@ -44417,16 +44421,15 @@ var buildSortState = function buildSortState(unsortedArray) {
     quick: (0, _quickSort2.default)(unsortedArray)
   };
 };
-
-var selectSorts = exports.selectSorts = function selectSorts(state) {
-  return state.sorts;
-};
-var selectMaxLength = exports.selectMaxLength = function selectMaxLength(state) {
-  return Object.values(selectSorts(state)).map(function (sort) {
-    return sort.length;
-  }).sort(function (a, b) {
-    return a - b;
-  }).reverse()[0];
+var buildInitialState = function buildInitialState() {
+  var unsortedArray = (0, _shuffledArrayFactory2.default)(INITIAL_SIZE);
+  return {
+    playing: false,
+    popup: false,
+    pointer: 0,
+    sorts: buildSortState(unsortedArray),
+    size: INITIAL_SIZE
+  };
 };
 
 var reducer = function reducer() {
