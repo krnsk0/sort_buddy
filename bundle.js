@@ -44056,7 +44056,7 @@ var disconnectedTopbar = function (_React$Component) {
           stepBack = _this$props.stepBack,
           stepForward = _this$props.stepForward,
           togglePlaying = _this$props.togglePlaying;
-
+      // arrow key presses will stop playing if playing
 
       if (evt.keyCode === 39) {
         if (_this.props.playing) togglePlaying();
@@ -44065,6 +44065,7 @@ var disconnectedTopbar = function (_React$Component) {
         if (_this.props.playing) togglePlaying();
         stepBack();
       } else if (evt.keyCode === 32) {
+        evt.preventDefault(); // prevents spacebar from activating the previously selected button
         togglePlaying();
       }
     };
@@ -44073,7 +44074,7 @@ var disconnectedTopbar = function (_React$Component) {
       _this.setState({ size: evt.target.value });
     };
 
-    _this.state = { size: props.size };
+    _this.state = { size: props.size }; // for the controlled form element
     return _this;
   }
 
@@ -44090,24 +44091,45 @@ var disconnectedTopbar = function (_React$Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps) {
-      var playing = this.props.playing;
+      var _props = this.props,
+          playing = _props.playing,
+          pointer = _props.pointer,
+          maxLength = _props.maxLength,
+          togglePlaying = _props.togglePlaying;
 
+      // if playing and have hit the max, stop
+
+      if (playing && pointer >= maxLength) {
+        togglePlaying();
+        clearInterval(this.interval);
+        return;
+      }
+
+      // set or clear an interval if playing flag changed
       if (playing && !prevProps.playing) {
         this.interval = setInterval(this.props.stepForward, 100);
       } else if (!playing && prevProps.playing) {
         clearInterval(this.interval);
       }
     }
+
+    // runs when the select element changes
+
   }, {
     key: 'onReset',
-    value: function onReset(evt) {
-      evt.preventDefault();
-      if (this.props.playing) (0, _store.togglePlaying)();
-      this.props.reset(this.state.size);
+    value: function onReset(evt, props) {
+      evt.preventDefault(); // stops form submission and page refresh
+      var playing = props.playing,
+          reset = props.reset;
+
+      if (playing) (0, _store.togglePlaying)(); // stops playing if it's playing
+      reset(this.state.size);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         { className: 'topbar' },
@@ -44123,11 +44145,15 @@ var disconnectedTopbar = function (_React$Component) {
         _react2.default.createElement(
           'span',
           { className: 'topbar-container' },
-          !this.props.playing && this.props.pointer > 0 && _react2.default.createElement(
+          _react2.default.createElement(
             'button',
             {
               type: 'button',
-              onClick: this.props.stepBack,
+              onClick: function onClick(evt) {
+                // stops playing if playing
+                if (_this2.props.playing) _this2.props.togglePlaying();
+                _this2.props.stepBack();
+              },
               className: 'topbar-button'
             },
             '<<'
@@ -44139,11 +44165,15 @@ var disconnectedTopbar = function (_React$Component) {
             ' / ',
             this.props.maxLength
           ),
-          !this.props.playing && this.props.pointer < this.props.maxLength && _react2.default.createElement(
+          _react2.default.createElement(
             'button',
             {
               type: 'button',
-              onClick: this.props.stepForward,
+              onClick: function onClick(evt) {
+                // stops playing if playing
+                if (_this2.props.playing) _this2.props.togglePlaying();
+                _this2.props.stepForward();
+              },
               className: 'topbar-button'
             },
             '>>'
@@ -44159,11 +44189,17 @@ var disconnectedTopbar = function (_React$Component) {
               onClick: this.props.togglePlaying,
               className: 'topbar-button'
             },
-            this.props.playing ? 'pause' : 'play'
+            this.props.playing ? 'stop' : 'play'
           ),
           _react2.default.createElement(
             'form',
-            { onSubmit: this.onReset, id: 'size-form' },
+            {
+              onSubmit: function onSubmit(evt) {
+                // have to pass in props to put them in scope
+                _this2.onReset(evt, _this2.props);
+              },
+              id: 'size-form'
+            },
             _react2.default.createElement(
               'button',
               { type: 'submit', className: 'topbar-button' },
@@ -44174,8 +44210,9 @@ var disconnectedTopbar = function (_React$Component) {
               {
                 id: 'size-selector',
                 className: 'size-selector',
-                onChange: this.onSizeChange,
-                value: this.state.size
+                onChange: this.onSizeChange
+                // taken from the initial state in redux store
+                , value: this.state.size
               },
               _react2.default.createElement(
                 'option',
