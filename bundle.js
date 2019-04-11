@@ -44424,7 +44424,9 @@ var selectSorts = exports.selectSorts = function selectSorts(state) {
 var selectMaxLength = exports.selectMaxLength = function selectMaxLength(state) {
   return Object.values(selectSorts(state)).map(function (sort) {
     return sort.length;
-  }).sort().reverse()[0];
+  }).sort(function (a, b) {
+    return a - b;
+  }).reverse()[0];
 };
 
 var reducer = function reducer() {
