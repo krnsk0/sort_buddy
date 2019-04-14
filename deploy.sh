@@ -10,7 +10,7 @@ function cleanup_at_exit {
 trap cleanup_at_exit EXIT
 
 # checkout the pages branch
-git checkout -b gh-pages
+git checkout gh-pages
 
 # run webpack in production mode
 webpack --mode=production
