@@ -6,6 +6,8 @@ set -e
 # return to master
 function cleanup_at_exit {
   git checkout master
+  git rm public/bundle.js
+  git rm public/bundle.js.map
 }
 trap cleanup_at_exit EXIT
 
