@@ -1,3 +1,5 @@
+set up deploy script correctly
+
 highlight boxes when sort is complete
 add display for progress for each sort
 add display for swaps for each sort
