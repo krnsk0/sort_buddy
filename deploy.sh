@@ -8,6 +8,7 @@ function cleanup_at_exit {
   git checkout master
   git rm -f public/bundle.js
   git rm -f public/bundle.js.map
+  webpack --mode=development
 }
 trap cleanup_at_exit EXIT
 
