@@ -5,6 +5,7 @@ set -e
 
 # return to master
 function cleanup_at_exit {
+  git checkout master
 }
 trap cleanup_at_exit EXIT
 
