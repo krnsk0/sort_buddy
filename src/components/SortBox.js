@@ -12,6 +12,9 @@ const SortBox = ({ displayName, pointer, history }) => {
       <div className="sort-container-label">{displayName}</div>
       <div className="sort-container">
         {history.length && (
+          // typeName={null} sets FlipMove to "wrapperless mode"
+          // https://github.com/joshwcomeau/react-flip-move
+          // enterAnimation="none" turns off animation of new bars that are added on a size change
           <FlipMove typeName={null} duration={DURATION} enterAnimation="none">
             {array.map(el => (
               <SortBar
@@ -26,6 +29,6 @@ const SortBox = ({ displayName, pointer, history }) => {
       </div>
     </div>
   );
-}
+};
 
 export default SortBox;

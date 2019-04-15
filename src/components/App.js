@@ -10,6 +10,7 @@ const disconnectedApp = ({ pointer, popup, sorts, closePopup }) => (
     <Topbar />
     <div className="body-column-container">
       <div className="body-column">
+        {/* the left column */}
         {['bubble', 'selection', 'insertion'].map(sort => (
           <SortBox
             key={sort}
@@ -20,6 +21,7 @@ const disconnectedApp = ({ pointer, popup, sorts, closePopup }) => (
         ))}
       </div>
       <div className="body-column">
+        {/* the right column */}
         {['quick', 'merge', 'heap'].map(sort => (
           <SortBox
             key={sort}

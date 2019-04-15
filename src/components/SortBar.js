@@ -3,17 +3,19 @@ import React from 'react';
 // this has to be a class component for react-flip-move to be able to animate it
 class SortBar extends React.Component {
   render() {
-    const height = 100 * (this.props.value / this.props.arrayLength) - 2;
+    const { value, arrayLength, status } = this.props;
+
+    const height = 100 * (value / arrayLength) - 2;
     const sortBarStyle = {
       height: `${height}%`
     };
     const sortBarContainerStyle = {
-      width: `${100 / this.props.arrayLength}%`
+      width: `${100 / arrayLength}%`
     };
 
     return (
       <div className="sort-bar-container" style={sortBarContainerStyle}>
-        <div className={`sort-bar ${this.props.status}`} style={sortBarStyle} />
+        <div className={`sort-bar ${status}`} style={sortBarStyle} />
       </div>
     );
   }

@@ -47,6 +47,7 @@ class disconnectedTopbar extends React.Component {
   keyHandler = evt => {
     const { stepBack, stepForward, togglePlaying, togglePopup } = this.props;
     // arrow key presses will stop playing if playing
+    // but only if the popup is closed
     if (evt.keyCode === 39 && !this.props.popup) {
       if (this.props.playing) togglePlaying();
       stepForward();
@@ -56,6 +57,7 @@ class disconnectedTopbar extends React.Component {
     } else if (evt.keyCode === 32) {
       evt.preventDefault(); // prevents spacebar from activating the previously selected button
       if (this.props.popup) togglePopup();
+      // if popup is open, close it
       else togglePlaying();
     }
   };

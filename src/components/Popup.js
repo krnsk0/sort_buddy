@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Topbar = props => {
+const Topbar = ({ togglePopup }) => {
   return (
     <div className="popup-outer">
       <div className="popup-inner">
@@ -22,7 +22,7 @@ const Topbar = props => {
           <div className="popup-text">Step backward: [left arrow]</div>
         </div>
         <div className="popup-inner-container">
-          <button type="button" onClick={props.togglePopup}>
+          <button type="button" onClick={togglePopup}>
             close
             <div>
               [<span>spacebar</span>]
