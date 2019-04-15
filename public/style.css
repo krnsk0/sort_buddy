@@ -139,7 +139,10 @@
   margin-top: 25px;
 }
 .popup-inner button div {
-  font-size: 8px;
+  font-size: 11px;
+}
+.popup-inner button div span {
+  color: rgb(216, 38, 38);
 }
 .popup-title {
   font-size: 28px;

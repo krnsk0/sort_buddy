@@ -24,7 +24,9 @@ const Topbar = props => {
         <div className="popup-inner-container">
           <button type="button" onClick={props.togglePopup}>
             close
-            <div>[spacebar]</div>
+            <div>
+              [<span>spacebar</span>]
+            </div>
           </button>
         </div>
       </div>
