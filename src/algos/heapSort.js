@@ -96,6 +96,7 @@ const heapSort = input => {
 
   heapSortHelper();
 
+  // mark first element sorted; "edge case"
   array[0].status = 'sorted';
   history.push(copyData(array));
   return history;

@@ -21,12 +21,14 @@ const quickSort = input => {
 
       if (pivot > array[i].value) {
         pivotIndex += 1;
+        // do the swap
         [array[pivotIndex], array[i]] = [array[i], array[pivotIndex]];
       }
     }
 
     array[start].status = 'unsorted';
 
+    // do the swap
     [array[pivotIndex], array[start]] = [array[start], array[pivotIndex]];
 
     array[pivotIndex].status = 'sorted';

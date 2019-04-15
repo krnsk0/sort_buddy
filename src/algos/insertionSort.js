@@ -19,13 +19,11 @@ const insertionSort = input => {
 
         history.push(copyData(array));
 
-        // turn off display comparison
         array[j].status = 'sorted';
         array[j + 1].status = 'sorted';
       } else {
         history.push(copyData(array));
 
-        // turn off display comparison
         array[j].status = 'sorted';
         array[j + 1].status = 'sorted';
         break;

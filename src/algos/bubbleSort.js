@@ -11,25 +11,21 @@ const bubbleSort = input => {
   for (let i = array.length - 1; i > 0; i -= 1) {
     let swapFlag = false;
     for (let j = 0; j < i; j += 1) {
-      // mark elements as comparing
       array[j].status = 'comparing';
       array[j + 1].status = 'comparing';
 
-      // swap if needed
+      // where the swap happens
       if (array[j].value > array[j + 1].value) {
         swapFlag = true;
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
       }
 
-      // push a copy to the history
       history.push(copyData(array));
-
-      // clear comparing state
       array[j].status = 'unsorted';
       array[j + 1].status = 'unsorted';
     }
 
-    // set the top element status
+    // set the top element status; "edge case"
     array[i].status = 'sorted';
 
     // quit if no swaps

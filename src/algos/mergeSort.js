@@ -10,6 +10,7 @@ const mergeSort = input => {
   // make a working copy of the array we'll use in the sort
   const array = copyData(input);
 
+  // in-place merge function -- start and end inclusive
   const merge = (start, middle, end) => {
     let i = start;
     let j = middle + 1;
@@ -53,6 +54,7 @@ const mergeSort = input => {
     history.push(copyData(array));
   };
 
+  // main mergesort helper
   const mergeRecursive = (start, end) => {
     if (end === start) return;
 
