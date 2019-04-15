@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-shadow */
 /* eslint-disable function-paren-newline */
 import React from 'react';
@@ -7,7 +8,8 @@ import {
   stepForward,
   stepBack,
   togglePlaying,
-  selectMaxLength
+  selectMaxLength,
+  togglePopup
 } from '../redux/store';
 
 class disconnectedTopbar extends React.Component {
@@ -43,17 +45,18 @@ class disconnectedTopbar extends React.Component {
   }
 
   keyHandler = evt => {
-    const { stepBack, stepForward, togglePlaying } = this.props;
+    const { stepBack, stepForward, togglePlaying, togglePopup } = this.props;
     // arrow key presses will stop playing if playing
-    if (evt.keyCode === 39) {
+    if (evt.keyCode === 39 && !this.props.popup) {
       if (this.props.playing) togglePlaying();
       stepForward();
-    } else if (evt.keyCode === 37) {
+    } else if (evt.keyCode === 37 && !this.props.popup) {
       if (this.props.playing) togglePlaying();
       stepBack();
     } else if (evt.keyCode === 32) {
       evt.preventDefault(); // prevents spacebar from activating the previously selected button
-      togglePlaying();
+      if (this.props.popup) togglePopup();
+      else togglePlaying();
     }
   };
 
@@ -145,7 +148,8 @@ const mapDispatchToProps = {
   reset: resetArray,
   stepForward,
   stepBack,
-  togglePlaying
+  togglePlaying,
+  togglePopup
 };
 
 const mapStateToProps = state => {
@@ -153,7 +157,8 @@ const mapStateToProps = state => {
     playing: state.playing,
     pointer: state.pointer,
     maxLength: selectMaxLength(state),
-    size: state.size
+    size: state.size,
+    popup: state.popup
   };
 };
 

@@ -22,27 +22,10 @@ export const TOGGLE_POPUP = 'TOGGLE_POPUP';
 export const TOGGLE_PLAYING = 'TOGGLE_PLAYING';
 
 // action creators
-export const resetArray = size => {
-  return {
-    type: RESET_ARRAY,
-    size
-  };
-};
-export const stepForward = () => {
-  return {
-    type: STEP_FORWARD
-  };
-};
-export const stepBack = () => {
-  return {
-    type: STEP_BACK
-  };
-};
-export const togglePopup = () => {
-  return {
-    type: TOGGLE_POPUP
-  };
-};
+export const resetArray = size => ({ type: RESET_ARRAY, size });
+export const stepForward = () => ({ type: STEP_FORWARD });
+export const stepBack = () => ({ type: STEP_BACK });
+export const togglePopup = () => ({ type: TOGGLE_POPUP });
 export const togglePlaying = () => ({ type: TOGGLE_PLAYING });
 
 // selectors
@@ -66,7 +49,7 @@ const buildInitialState = () => {
   const unsortedArray = shuffledArrayFactory(INITIAL_SIZE);
   return {
     playing: false,
-    popup: false,
+    popup: true,
     pointer: 0,
     sorts: buildSortState(unsortedArray),
     size: INITIAL_SIZE

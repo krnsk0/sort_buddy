@@ -5,7 +5,7 @@ import Popup from './Popup';
 import { connect } from 'react-redux';
 import { selectSorts, togglePopup } from '../redux/store';
 
-const disconnectedApp = ({ pointer, popup, sorts }) => (
+const disconnectedApp = ({ pointer, popup, sorts, closePopup }) => (
   <div className="app">
     <Topbar />
     <div className="body-column-container">
@@ -30,7 +30,7 @@ const disconnectedApp = ({ pointer, popup, sorts }) => (
         ))}
       </div>
     </div>
-    {popup && <Popup togglePopup={togglePopup} />}
+    {popup && <Popup togglePopup={closePopup} />}
   </div>
 );
 
@@ -42,7 +42,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = { togglePopup };
+const mapDispatchToProps = dispatch => {
+  return {
+    closePopup: () => dispatch(togglePopup())
+  };
+};
 
 export default connect(
   mapStateToProps,
