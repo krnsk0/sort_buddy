@@ -56,6 +56,7 @@ const buildInitialState = () => {
   };
 };
 
+// reducer
 const reducer = (state = buildInitialState(), action) => {
   // not pure due to Math.random(), oh well
   if (action.type === RESET_ARRAY) {
