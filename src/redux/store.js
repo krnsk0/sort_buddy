@@ -12,7 +12,7 @@ import heapSort from '../algos/heapSort';
 import quickSort from '../algos/quickSort';
 
 // constants
-const INITIAL_SIZE = 16;
+const INITIAL_SIZE = 32;
 
 // action types
 export const RESET_ARRAY = 'RESET_ARRAY';
