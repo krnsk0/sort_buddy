@@ -13,7 +13,7 @@ const Topbar = ({ togglePopup }) => {
             <a href="https://github.com/krnsk0">krnsk0</a>
           </div>
         </div>
-        <div className="popup-inner-container">
+        <div className="popup-inner-container keyboard-shortcuts">
           <div className="popup-text">
             <b>Keyboard shortcuts:</b>
           </div>
@@ -23,8 +23,8 @@ const Topbar = ({ togglePopup }) => {
         </div>
         <div className="popup-inner-container">
           <button type="button" onClick={togglePopup}>
-            close
-            <div>
+            start
+            <div className="keyboard-shortcuts">
               [<span>spacebar</span>]
             </div>
           </button>

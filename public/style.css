@@ -137,11 +137,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
+}
+@media (max-width: 600px) {
+  .popup-outer {
+    background-color: white;
+  }
 }
 .popup-inner {
   background: white;
   border: 1px solid black;
   padding: 15px;
+}
+@media (max-width: 600px) {
+  .popup-inner {
+    border: none;
+  }
 }
 .popup-inner-container {
   display: flex;
@@ -173,4 +184,9 @@
 .popup-text {
   text-align: center;
   font-size: 14px;
+}
+@media (max-width: 600px) {
+  .keyboard-shortcuts {
+    display: none;
+  }
 }
