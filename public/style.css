@@ -21,7 +21,7 @@
     position: fixed;
     top: 5px;
     right: 25px;
-    z-index: 1000;
+    z-index: 100;
     width: 215px;
   }
 }
@@ -133,13 +133,11 @@
   right: 0;
   bottom: 0;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .popup-inner {
-  position: absolute;
-  left: 30%;
-  right: 30%;
-  top: 28%;
-  bottom: 35%;
   background: white;
   border: 1px solid black;
   padding: 15px;
