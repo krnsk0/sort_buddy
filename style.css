@@ -14,6 +14,17 @@
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 600px) {
+  .topbar {
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 5px;
+    right: 25px;
+    z-index: 1000;
+    width: 215px;
+  }
+}
 .title {
   font-size: 22px;
   margin: 5px;
@@ -57,11 +68,21 @@
   flex-direction: row;
   justify-content: space-between;
 }
+@media (max-width: 600px) {
+  .body-column-container {
+    flex-direction: column;
+  }
+}
 .body-column {
   display: flex;
   flex-direction: column;
   justify-content: start;
   width: 49.5%;
+}
+@media (max-width: 600px) {
+  .body-column {
+    width: 100%;
+  }
 }
 .sort-container-outer {
   margin-top: 10px;
