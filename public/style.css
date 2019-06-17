@@ -13,7 +13,12 @@
   background-color: black;
   display: flex;
   justify-content: space-between;
+  align-content: center;
 }
+.topbar * {
+  font-size: 22px;
+}
+
 @media (max-width: 600px) {
   .topbar {
     flex-direction: column;
@@ -26,19 +31,16 @@
   }
 }
 .title {
-  font-size: 22px;
   margin: 5px;
   color: white;
 }
 .topbar-link-container {
-  font-size: 22px;
   margin: 5px;
 }
 .topbar-button {
   color: red;
   text-decoration: underline;
   background-color: black;
-  font-size: 22px;
   border: none;
   cursor: pointer;
 }
@@ -47,7 +49,6 @@
   cursor: auto;
 }
 .topbar-text {
-  font-size: 22px;
   margin: 5px;
   color: white;
 }
